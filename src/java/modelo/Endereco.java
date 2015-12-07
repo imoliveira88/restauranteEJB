@@ -1,0 +1,150 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package modelo;
+
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import org.hibernate.validator.constraints.*;
+
+/**
+ *
+ * @author MagalhÃ£es Oliveira
+ */
+@ManagedBean(name = "endereco")
+@SessionScoped
+@Entity
+@Table(name = "TB_ENDERECO")
+public class Endereco implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
+    public Endereco(String tl, String l, int n, String c, String cid, String es){
+        this.tipoLogradouro = tl;
+        this.logradouro = l;
+        this.numero = n;
+        this.cep = c;
+        this.cidade = cid;
+        this.estado = es;                
+    }
+    
+    public Endereco(){};
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_ENDERECO")
+    private Long id;
+
+    @NotBlank
+    @Column(name = "END_TIPOLOGRADOURO")
+    private String tipoLogradouro;
+    
+    @NotBlank
+    @Column(name = "END_LOGRADOURO")
+    private String logradouro;
+    
+    @NotNull
+    @Column(name = "END_NUMERO")
+    private int numero;
+    
+    @NotNull
+    @Pattern(regexp = "[0-9]{2}.[0-9]{3}-[0-9]{3}", message = "{modelo.Endereco.cep}")
+    @Column(name = "END_CEP")
+    private String cep;
+    
+    @NotBlank
+    @Size(max = 40)
+    @Column(name = "END_CIDADE")
+    private String cidade;
+    
+    @ValidaEstado
+    @Size(min = 2, max = 2)
+    @Column(name = "END_ESTADO")
+    private String estado;
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTipoLogradouro() {
+        return tipoLogradouro;
+    }
+
+    public void setTipoLogradouro(String tipoLogradouro) {
+        this.tipoLogradouro = tipoLogradouro;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }   
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Endereco)) {
+            return false;
+        }
+        Endereco other = (Endereco) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "EndereÃ§o: " + this.getTipoLogradouro() + " " + this.getLogradouro() + ", " + this.getNumero() + ", " + this.getCep() + ", " + this.getCidade() + "-" + this.getEstado();
+    }
+    
+}
