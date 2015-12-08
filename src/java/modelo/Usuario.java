@@ -11,10 +11,12 @@ import java.util.Date;
 import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.NotBlank;
 import persistencia.UsuarioDAOJPA;
+import principal.GeraTabelas;
 
 /**
  *
@@ -22,7 +24,14 @@ import persistencia.UsuarioDAOJPA;
  */
 
 @Entity
+@NamedQueries(value = {
+  @NamedQuery(name = "Usuario.RetornaSenha",
+              query= " SELECT u.senha FROM Usuario u " +
+                     " WHERE u.telefone = :tel")
+})
 @Table(name = "TB_USUARIO")
+@ManagedBean(name = "usuario")
+@SessionScoped
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "DISC_USUARIO", discriminatorType = DiscriminatorType.STRING, length = 1)
 public class Usuario implements Serializable {
@@ -107,6 +116,29 @@ public class Usuario implements Serializable {
         this.id = id;
     }
     
+    //Compara se o telefone digitado corresponde a um usuário válido, e, correspondendo,
+    //compara a senha fornecida, com a senha que há no banco
+    public boolean validaUsuario(){
+        UsuarioDAOJPA ud = new UsuarioDAOJPA();
+        return this.telefone.equals(ud.retornaSenha(this.telefone));
+    }
+    
+    public String doLogin() {
+        boolean valido = this.validaUsuario();
+         try {   
+             if (!valido) {
+               FacesContext.getCurrentInstance().validationFailed();
+               return "/cadastro_cliente.xhtml?faces-redirect=true";
+             }
+             
+             return "/cadastro_cliente.xhtml?faces-redirect=true";
+         } catch (Exception e) {
+             FacesContext.getCurrentInstance().validationFailed();
+             e.printStackTrace();
+             return "";
+         }
+   
+      }
     
     @Override
     public String toString(){

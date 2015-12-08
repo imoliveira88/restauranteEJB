@@ -21,9 +21,28 @@ public class GeraTabelas {
         
         Prato p = new Prato("Batata frita",5.98,"Outro prato bom!");
         
+        Endereco endereco = new Endereco("rua","professor Solto",23,"12.324-446","Recife","PE");
+        Bandeira bandeira = new Bandeira("VISA");
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");  
+        Date data = formatador.parse("01/09/2020");
+        Cartao cartao = new Cartao(bandeira,"234532432432",data);
+        Cliente c = new Cliente("Igor","oxente","222",endereco,cartao);
+        
         try{
             PratoDAO fo = new PratoDAOJPA();
+            BandeiraDAO b = new BandeiraDAOJPA();
+            EnderecoDAO e = new EnderecoDAOJPA();
+            CartaoDAO car = new CartaoDAOJPA();
+            ClienteDAO cliente = new ClienteDAOJPA();
+            
             fo.save(p);
+            b.save(bandeira);
+            cliente.save(c);
+            e.save(endereco);
+            
+            
+            car.save(cartao);
+            
         }catch(Exception e){
             System.out.println(e);
         }

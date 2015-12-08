@@ -12,12 +12,12 @@
             <h:panelGrid columns="2">
 
                 <h:outputText value="Login (telefone): " />
-                <h:inputText value="#{loginusuario.telefone}" size="37" />
+                <h:inputText value="#{usuario.telefone}" size="37" />
 
                 <h:outputText value="Senha: " />
-                <h:inputSecret value="#{loginusuario.senha}" size="37" />
+                <h:inputSecret value="#{usuario.senha}" size="37" />
 
-                <h:commandButton value="Login" action="#{loginusuario.doLogin()}"/>
+                <h:commandButton value="Login" action="#{usuario.doLogin()}"/>
                 
             </h:panelGrid>
 

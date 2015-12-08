@@ -44,7 +44,7 @@ public class Cartao implements Serializable{
     private Bandeira bandeira;
     
     @NotNull
-    @CreditCardNumber
+    //@CreditCardNumber
     @Column(name = "CARTAO_NUMERO")
     private String numero;
     

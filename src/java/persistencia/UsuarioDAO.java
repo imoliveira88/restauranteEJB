@@ -20,6 +20,8 @@ public interface UsuarioDAO {
     public void update(Usuario b);
  
     public void delete(Usuario b);
+    
+    public String retornaSenha(String telefone);
  
     public List<Usuario> findAll();
 }
