@@ -26,6 +26,8 @@ public class Funcionario extends Usuario {
         this.cargo = cargo;
     }
     
+    public Funcionario(){};
+    
     @NotNull
     @Column(name = "FUNC_SALARIO")
     private double salario;

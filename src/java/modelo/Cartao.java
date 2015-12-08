@@ -31,6 +31,8 @@ public class Cartao implements Serializable{
         this.validade = valid;
     }
     
+    public Cartao(){};
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_CARTAO")

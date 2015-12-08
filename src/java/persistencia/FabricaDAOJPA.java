@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 
 public class FabricaDAOJPA {
 	private static final String PERSISTENCE_UNIT_NAME = "restaurante";
-	private EntityManagerFactory factory;
+	private static EntityManagerFactory factory;
 	private static FabricaDAOJPA instance = null;
 	
 	private FabricaDAOJPA(){

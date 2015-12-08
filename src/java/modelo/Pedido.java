@@ -30,7 +30,7 @@ public class Pedido implements Serializable {
     @Column(name = "ID_PEDIDO")
     private Long id;
     
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private final List<ItemPedido> itens;
     
     @ManyToOne(fetch = FetchType.LAZY)

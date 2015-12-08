@@ -7,6 +7,7 @@ package persistencia;
 
 import modelo.Usuario;
 import javax.persistence.Query;
+import modelo.LoginUsuario;
 
 /**
  *
@@ -21,7 +22,7 @@ public class UsuarioDAOJPA extends DAOGenericoJPA<Long, Usuario> implements Usua
     }
     
     public String retornaSenha(String telefone){
-        Query query = super.getEm().createNamedQuery("Usuario.RetornaSenha");
+        Query query = super.getEm().createNamedQuery("Login.RetornaSenha",LoginUsuario.class);
 
         query.setParameter("tel", telefone);
         

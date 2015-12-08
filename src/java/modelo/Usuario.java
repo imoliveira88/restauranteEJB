@@ -21,15 +21,6 @@ import persistencia.UsuarioDAOJPA;
  * @author MagalhÃ£es Oliveira
  */
 
-@NamedQueries({
-  @NamedQuery(name = " Usuario.RetornaSenha",
-              query= " SELECT u.senha FROM Usuario u " +
-                     " WHERE u.telefone = :tel")
-})
-
-
-@ManagedBean(name = "usuario")
-@SessionScoped
 @Entity
 @Table(name = "TB_USUARIO")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -116,12 +107,6 @@ public class Usuario implements Serializable {
         this.id = id;
     }
     
-    //Compara se o telefone digitado corresponde a um usuário válido, e, correspondendo,
-    //compara a senha fornecida, com a senha que há no banco
-    public boolean validaUsuario(){
-        UsuarioDAOJPA u = new UsuarioDAOJPA();
-        return this.telefone.equals(u.retornaSenha(this.telefone));
-    }
     
     @Override
     public String toString(){

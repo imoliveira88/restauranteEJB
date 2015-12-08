@@ -29,6 +29,8 @@ public class ItemPedido implements Serializable {
         this.setSubtotal();
     }
     
+    public ItemPedido(){};
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_ITEMPEDIDO")

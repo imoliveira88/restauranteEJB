@@ -3,23 +3,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Login</title>
     </h:head>
-    <h:body>
+    <h:body>      
+        
         <h:form>
-          <h3>Digite suas credenciais</h3>   
-         <table>
-            <tr>
-               <td>Telefone:</td>
-               <td><h:inputText value="#{usuario.telefone}" /></td>
-            </tr>
-            <tr>
-               <td>Senha:</td>
-               <td><h:inputSecret value="#{usuario.senha}"/></td>
-            </tr>
-         </table>
-         <p><h:commandButton value="Login" action="#{usuario.validaUsuario}"/></p>
-      </h:form>
+
+            <h:panelGrid columns="2">
+
+                <h:outputText value="Login (telefone): " />
+                <h:inputText value="#{loginusuario.telefone}" size="37" />
+
+                <h:outputText value="Senha: " />
+                <h:inputSecret value="#{loginusuario.senha}" size="37" />
+
+                <h:commandButton value="Login" action="#{loginusuario.doLogin()}"/>
+                
+            </h:panelGrid>
+
+        </h:form>  
+        
+        
     </h:body>
 </html>
 
