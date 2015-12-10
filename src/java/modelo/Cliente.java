@@ -47,4 +47,5 @@ public class Cliente extends Usuario {
     public void setCartao(Cartao cartao) {
         this.cartao = cartao;
     }
+    
 }

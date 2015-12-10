@@ -16,12 +16,14 @@
 
                 <h:outputText value="Senha: " />
                 <h:inputSecret value="#{usuario.senha}" size="37" />
-
-                <h:commandButton value="Login" action="#{usuario.doLogin()}"/>
                 
             </h:panelGrid>
+            
+            <h:commandButton value="Login" action="#{usuario.doLogin()}"/>
 
-        </h:form>  
+        </h:form>
+        
+        <a href='cadastro_cliente.xhtml?faces-redirect=true'>Não tem cadastro? Clique aqui!</a>
         
         
     </h:body>

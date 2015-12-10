@@ -7,33 +7,63 @@
         <title>Cadastro de Cliente</title>
     </h:head>
     <h:body>
+        
       <h:form>
-          <h3>Cadastro de Cliente</h3>   
-         <table>
-            <tr>
-               <td>Nome:</td>
-               <td><h:inputText value="#{usuario.nome}"/></td>
-            </tr>
-            <tr>
-               <td>Telefone:</td>
-               <td><h:inputSecret value="#{usuario.telefone}"/></td>
-            </tr>
-         </table>
-          <fieldset>
-              <legend>Endereço</legend>
-              <table>
-                  <tr>
-                    <td>Tipo Logradouro:</td>
-                    <td><h:inputText value="#{endereco.tipoLogradouro}"/></td>
-                  </tr>
-                  <tr>
-                    <td>Logradouro</td>
-                    <td><h:inputText value="#{endereco.logradouro}"/></td>
-                  </tr>
-              </table>
-          </fieldset>
-         <p><h:commandButton value="Login" action="$"/></p>
-      </h:form>
+          <h2>Informações Básicas</h2>
+            <h:panelGrid columns="2" id = "basico">
+
+                <h:outputText value="Nome: " />
+                <h:inputText value="#{cadastroC.nome}" size="37" />
+
+                <h:outputText value="Telefone (será seu login): " />
+                <h:inputText value="#{cadastroC.telefone}" size="12" />
+                
+                <h:outputText value="Senha: " />
+                <h:inputSecret value="#{cadastroC.senha}" size="8" />
+                
+            </h:panelGrid>
+          
+          <h2>Endereço</h2>
+          <h:panelGrid columns="2" id = "endereco">
+
+                <h:outputText value="Tipo Logradouro: " />
+                <h:inputText value="#{cadastroC.tipologradouro}" size="10" />
+
+                <h:outputText value="Logradouro: " />
+                <h:inputText value="#{cadastroC.logradouro}" size="37" />
+                
+                <h:outputText value="Número: " />
+                <h:inputText value="#{cadastroC.numero}" size="5" />
+                
+                <h:outputText value="CEP: " />
+                <h:inputText value="#{cadastroC.cep}" size="10" />
+                
+                <h:outputText value="Cidade: " />
+                <h:inputText value="#{cadastroC.cidade}" size="20" />
+                
+                <h:outputText value="Estado: " />
+                <h:inputText value="#{cadastroC.estado}" size="2" />
+                
+            </h:panelGrid>
+            
+            <h2>Cartão</h2>
+            <h:panelGrid columns="2" id = "cartao">
+
+                <h:outputText value="Bandeira: " />
+                <h:inputText value="#{cadastroC.bandeira}" size="16" />
+
+                <h:outputText value="Número: " />
+                <h:inputText value="#{cadastroC.numeroCartao}" size="16" />
+                
+                <h:outputText value="Validade: " />
+                <h:inputText value="#{cadastroC.validade}" size="8" />
+                
+            </h:panelGrid>
+            
+            <h:commandButton value="Enviar" action="#{cadastroC.cadastraCliente}"/>
+
+        </h:form>  
+        
    </h:body>
 </html>
 
