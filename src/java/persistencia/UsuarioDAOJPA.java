@@ -5,6 +5,7 @@
  */
 package persistencia;
 
+import java.util.List;
 import javax.persistence.NoResultException;
 import modelo.Usuario;
 import javax.persistence.Query;
@@ -33,6 +34,30 @@ public class UsuarioDAOJPA extends DAOGenericoJPA<Long, Usuario> implements Usua
         catch(NoResultException e){
             return "";
         }
+    }
+    
+    public boolean existeUsuario(Usuario usu){
+        String query = "select e from Usuario e";
+        List<Usuario> usuarios = super.getEm().createQuery(query, Usuario.class).getResultList();
+        try{
+            for(Usuario usuario : usuarios){
+                if(usuario.equals(usu)) return true;
+            }
+            return false;
+        }
+        catch(NoResultException e){
+            return false;
+        }
+    }
+    
+    @Override
+    public void save(Usuario b) {
+        super.getEm().getTransaction().begin();
+        if(!existeUsuario(b)){
+            super.getEm().persist(b);
+        }
+        else super.getEm().merge(b);
+        super.getEm().getTransaction().commit();
     }
     
     @Override

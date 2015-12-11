@@ -5,8 +5,16 @@
     <h:head>
         <title>Login</title>
     </h:head>
-    <h:body>      
+    <h:body>
         
+        <table id="menu">
+            <tr>
+                <td onclick="faces/index.xhtml">Login</td>
+                <td onclick="faces/cadastro_cliente.xhtml">Home</td>
+                <td onclick="faces/contato.xhtml">Contato</td>
+            </tr>
+        </table>
+            
         <h:form>
 
             <h:panelGrid columns="2">
@@ -23,9 +31,10 @@
 
         </h:form>
         
-        <a href='cadastro_cliente.xhtml?faces-redirect=true'>Não tem cadastro? Clique aqui!</a>
+        <a href='faces/cadastro_cliente.xhtml'>Não tem cadastro? Clique aqui!</a>
         
-        
+        <h:outputText value="#{cadastroC.mensagem}"/>
+         
     </h:body>
 </html>
 

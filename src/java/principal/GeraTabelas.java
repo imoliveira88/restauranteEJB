@@ -38,9 +38,6 @@ public class GeraTabelas {
             fo.save(p);
             b.save(bandeira);
             cliente.save(c);
-            e.save(endereco);
-            
-            
             car.save(cartao);
             
         }catch(Exception e){

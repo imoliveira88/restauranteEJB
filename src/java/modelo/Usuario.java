@@ -16,7 +16,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.NotBlank;
 import persistencia.UsuarioDAOJPA;
-import principal.GeraTabelas;
 
 /**
  *
@@ -50,7 +49,7 @@ public class Usuario implements Serializable {
     }
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Size(min = 2, max = 40)

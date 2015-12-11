@@ -5,7 +5,9 @@
  */
 package persistencia;
 
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import modelo.Endereco;
 
 /**
@@ -22,11 +24,27 @@ public class EnderecoDAOJPA extends DAOGenericoJPA<Long, Endereco> implements En
         return super.getById(pk);
     }
     
+    public boolean existeEndereco(Endereco end){
+        String query = "select e from Endereco e";
+        List<Endereco> enderecos = super.getEm().createQuery(query, Endereco.class).getResultList();
+        try{
+            for(Endereco endere : enderecos){
+                if(endere.equals(end)) return true;
+                        }
+            return false;
+        }
+        catch(NoResultException e){
+            return false;
+        }
+    }
+    
     @Override
-    public void save(Endereco e) {
+    public void save(Endereco b) {
         super.getEm().getTransaction().begin();
-        if(e.getId() == null) super.getEm().persist(e);
-        else super.getEm().merge(e);
+        if(!existeEndereco(b)){
+            super.getEm().persist(b);
+        }
+        else super.getEm().merge(b);
         super.getEm().getTransaction().commit();
     }
 }

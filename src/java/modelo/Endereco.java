@@ -129,16 +129,14 @@ public class Endereco implements Serializable {
         return hash;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Endereco)) {
-            return false;
-        }
-        Endereco other = (Endereco) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
+    public boolean equals(Endereco end) {
+        if(!this.tipoLogradouro.equals(end.getTipoLogradouro())) return false;
+        else if(!this.logradouro.equals(end.getLogradouro())) return false;
+        else if(!this.cidade.equals(end.getCidade())) return false;
+        else if(!this.estado.equals(end.getEstado())) return false;
+        else if(!this.cep.equals(end.getCep())) return false;
+        else if(this.numero != end.getNumero()) return false;
+        
         return true;
     }
 

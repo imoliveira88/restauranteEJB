@@ -31,6 +31,7 @@ public class cadastroCliente{
     private String nome;
     private String telefone;
     private String senha;
+    private String mensagem;
     /**
      * Creates a new instance of cadastroCliente
      */
@@ -39,6 +40,14 @@ public class cadastroCliente{
 
     public String getBandeira() {
         return bandeira;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
 
     public void setBandeira(String bandeira) {
@@ -147,11 +156,11 @@ public class cadastroCliente{
         Endereco endereco = new Endereco(tipologradouro,logradouro,numero,cep,cidade,estado);
         Cliente cliente = new Cliente(nome,senha,telefone,endereco,cartao);
         
-        b.save(band);
-        c.save(cartao);
-        e.save(endereco);
+
         cli.save(cliente);
         
-        return "/login.xhtml?faces-redirect=true";
+        this.setMensagem("Cadastro feito com sucesso! Realize login!");
+        
+        return "index.xhtml?faces-redirect=true";
     }
 }
