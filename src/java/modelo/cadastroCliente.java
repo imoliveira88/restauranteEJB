@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import persistencia.*;
 
 /**
@@ -17,7 +18,7 @@ import persistencia.*;
  * @author Magalhães Oliveira
  */
 @ManagedBean(name = "cadastroC")
-@RequestScoped
+@SessionScoped
 public class cadastroCliente{
     private String bandeira;
     private String numeroCartao;
@@ -143,9 +144,6 @@ public class cadastroCliente{
     }  
     
     public String cadastraCliente() throws ParseException{
-        BandeiraDAOJPA b = new BandeiraDAOJPA();
-        CartaoDAOJPA c = new CartaoDAOJPA();
-        EnderecoDAOJPA e = new EnderecoDAOJPA();
         ClienteDAOJPA cli = new ClienteDAOJPA();
         
         SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");  

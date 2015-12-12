@@ -2,64 +2,70 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Cadastro de Cliente</title>
     </h:head>
     <h:body>
         
-      <h:form>
-          <h2>Informações Básicas</h2>
-            <h:panelGrid columns="2" id = "basico">
+        <h:form>
+            <p:growl id="msgs" showDetail="true" />
 
-                <h:outputText value="Nome: " />
-                <h:inputText value="#{cadastroC.nome}" size="37" />
+            <p:fieldset legend="Informações Básicas" style="margin-bottom:20px">
+                <h:panelGrid columns="2" id = "basico">
 
-                <h:outputText value="Telefone (será seu login): " />
-                <h:inputText value="#{cadastroC.telefone}" size="12" />
-                
-                <h:outputText value="Senha: " />
-                <h:inputSecret value="#{cadastroC.senha}" size="8" />
-                
-            </h:panelGrid>
-          
-          <h2>Endereço</h2>
-          <h:panelGrid columns="2" id = "endereco">
+                    <h:outputText value="Nome: " />
+                    <h:inputText value="#{cadastroC.nome}" size="37" />
 
-                <h:outputText value="Tipo Logradouro: " />
-                <h:inputText value="#{cadastroC.tipologradouro}" size="10" />
+                    <h:outputText value="Telefone (será seu login): " />
+                    <h:inputText value="#{cadastroC.telefone}" size="12" />
 
-                <h:outputText value="Logradouro: " />
-                <h:inputText value="#{cadastroC.logradouro}" size="37" />
-                
-                <h:outputText value="Número: " />
-                <h:inputText value="#{cadastroC.numero}" size="5" />
-                
-                <h:outputText value="CEP: " />
-                <h:inputText value="#{cadastroC.cep}" size="10" />
-                
-                <h:outputText value="Cidade: " />
-                <h:inputText value="#{cadastroC.cidade}" size="20" />
-                
-                <h:outputText value="Estado: " />
-                <h:inputText value="#{cadastroC.estado}" size="2" />
-                
-            </h:panelGrid>
-            
-            <h2>Cartão</h2>
-            <h:panelGrid columns="2" id = "cartao">
+                    <h:outputText value="Senha: " />
+                    <h:inputSecret value="#{cadastroC.senha}" size="8" />
 
-                <h:outputText value="Bandeira: " />
-                <h:inputText value="#{cadastroC.bandeira}" size="16" />
+                </h:panelGrid>
+            </p:fieldset>
 
-                <h:outputText value="Número: " />
-                <h:inputText value="#{cadastroC.numeroCartao}" size="16" />
-                
-                <h:outputText value="Validade: " />
-                <h:inputText value="#{cadastroC.validade}" size="8" />
-                
-            </h:panelGrid>
-            
+            <p:fieldset legend="Endereço" style="margin-bottom:20px">
+                <h:panelGrid columns="2" id = "endereco">
+
+                    <h:outputText value="Tipo Logradouro: " />
+                    <h:inputText value="#{cadastroC.tipologradouro}" size="10" />
+
+                    <h:outputText value="Logradouro: " />
+                    <h:inputText value="#{cadastroC.logradouro}" size="37" />
+
+                    <h:outputText value="Número: " />
+                    <h:inputText value="#{cadastroC.numero}" size="5" />
+
+                    <h:outputText value="CEP: " />
+                    <h:inputText value="#{cadastroC.cep}" size="10" />
+
+                    <h:outputText value="Cidade: " />
+                    <h:inputText value="#{cadastroC.cidade}" size="20" />
+
+                    <h:outputText value="Estado: " />
+                    <h:inputText value="#{cadastroC.estado}" size="2" />
+
+                </h:panelGrid>
+            </p:fieldset>
+
+            <p:fieldset legend="Informações do Cartão" style="margin-bottom:20px">
+                <h:panelGrid columns="2" id = "cartao">
+
+                    <h:outputText value="Bandeira: " />
+                    <h:inputText value="#{cadastroC.bandeira}" size="16" />
+
+                    <h:outputText value="Número: " />
+                    <h:inputText value="#{cadastroC.numeroCartao}" size="16" />
+
+                    <h:outputText value="Validade: " />
+                    <h:inputText value="#{cadastroC.validade}" size="8" />
+
+                </h:panelGrid>
+            </p:fieldset>
+
             <h:commandButton value="Enviar" action="#{cadastroC.cadastraCliente}"/>
 
         </h:form>  
