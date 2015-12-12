@@ -10,39 +10,57 @@
     </h:head>
     <h:body>
         
-        <table id="menu">
-            <tr>
-                <td>Login</td>
-                <td>Home</td>
-                <td>Contato</td>
-            </tr>
-        </table>
+        <h:form>
+            <p:tabMenu activeIndex="#{param.i}">
+                <p:menuitem value="Overview" outcome="index.xhtml">
+                    <f:param name="i" value="0" />
+                </p:menuitem>
+                <p:menuitem value="Demos" outcome="index.xhtml">
+                    <f:param name="i" value="1" />
+                </p:menuitem>
+                <p:menuitem value="Documentation" outcome="index.xhtml">
+                    <f:param name="i" value="2" />
+                </p:menuitem>
+                <p:menuitem value="Support" outcome="index.xhtml">
+                    <f:param name="i" value="3" />
+                </p:menuitem>
+                <p:menuitem value="Social" outcome="index.xhtml">
+                    <f:param name="i" value="4" />
+                </p:menuitem>
+            </p:tabMenu>
+        </h:form>
         
-            <p:dialog header="Login" widgetVar="dialogHello"  height="200" visible="true" modal="true">
-                <h:form>
-                    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-                    <h:panelGrid columns="2" cellpadding="5">
+            
+        <h:form>
+            <p:growl id="msgs" showDetail="true" />
 
-                        <h:outputText value="Login (telefone): " />
-                        <h:inputText value="#{usuario.telefone}" size="37" />
+            <p:fieldset legend="Login" style="margin-bottom:20px">
+                <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+                <h:panelGrid columns="2" cellpadding="5">
 
-                        <h:outputText value="Senha: " />
-                        <h:inputSecret value="#{usuario.senha}" size="37" />
+                    <h:outputText value="Login (telefone): " />
+                    <h:inputText value="#{usuario.telefone}" size="37" />
 
-                        <h:commandButton value="Login" action="#{usuario.doLogin()}"/>
+                    <h:outputText value="Senha: " />
+                    <h:inputSecret value="#{usuario.senha}" size="37" />
 
-                        <f:facet name="footer">
+                    <h:commandButton value="Login" action="#{usuario.doLogin()}"/>
 
-                            <a href='faces/cadastro_cliente.xhtml'>Não tem cadastro? Clique aqui!</a>
-                            <br/>
-                            <br/>
-                            <h:outputText value="#{cadastroC.mensagem}"/>  
-                        </f:facet>  
+                    <f:facet name="footer">
 
-                    </h:panelGrid>
-                </h:form>
-            </p:dialog>
+                        <a href='faces/cadastro_cliente.xhtml'>Não tem cadastro? Clique aqui!</a>
+                        <br/>
+                        <br/>
+                        <h:outputText value="#{cadastroC.mensagem}"/>  
+                    </f:facet>  
 
+                </h:panelGrid>
+            </p:fieldset>
+        </h:form>
+            
+        
+        
+            
     </h:body>
 </html>
 
