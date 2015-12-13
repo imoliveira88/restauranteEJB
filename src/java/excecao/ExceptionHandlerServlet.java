@@ -32,10 +32,10 @@ public class ExceptionHandlerServlet extends HttpServlet {
         PrintWriter out = response.getWriter(); 
         out.write("<html><head><title>Exception/Error Details</title></head><body>");
         if(statusCode == 404){
-            out.write("<h1>Página não encontrada. Clique <a href='home.xhtml'>aqui</a> para voltar à Home Page.</h1>");
+            out.write("<h1>Página não encontrada. Clique <a href='home.xhtml?faces-redirect=true'>aqui</a> para voltar à Home Page.</h1>");
          }
         else{
-            out.write("<h1>Ocorreu um erro. Clique <a href='home.xhtml'>aqui</a> para voltar à Home Page.</h1>");
+            out.write("<h1>Ocorreu um erro. Clique <a href='home.xhtml?faces-redirect=true'>aqui</a> para voltar à Home Page.</h1>");
         }
         out.write("</body></html>");
     }

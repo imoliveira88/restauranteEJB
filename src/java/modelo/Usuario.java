@@ -7,6 +7,7 @@ import java.util.Objects;
 import javax.faces.FacesException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.el.EvaluationException;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.NotBlank;
@@ -123,7 +124,7 @@ public class Usuario implements Serializable {
         return this.telefone.equals(ud.retornaSenha(this.telefone));
     }
     
-    public String doLogin() throws FacesException,ExceptionInInitializerError{
+    public String doLogin() throws FacesException,ExceptionInInitializerError,EvaluationException{
         boolean valido;
         
         try{
@@ -134,12 +135,12 @@ public class Usuario implements Serializable {
          try {   
              if (!valido) {
                setMensagem("Login ou senha incorretos!");
-               return "/index.xhtml?faces-redirect=true";
+               return "/login.xhtml?faces-redirect=true";
              }
              return "/cadastro_cliente.xhtml?faces-redirect=true";
          } catch (Exception ex) {
              setMensagem("Login ou senha incorretos!");
-             return "/index.xhtml?faces-redirect=true";
+             return "/login.xhtml?faces-redirect=true";
          }
    
       }

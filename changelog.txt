@@ -1,2 +1,3 @@
 *IGOR - Adicionada pasta com bibliotecas
 *IGOR - Corrigido problema na cadastra_funcionario.xhtml
+*IGOR - Versão funcional de bibliotecas
