@@ -49,6 +49,10 @@ public class cadastroFuncionario{
     public void setTipologradouro(String tipologradouro) {
         this.tipologradouro = tipologradouro;
     }
+    
+    public String getTipologradouro() {
+        return tipologradouro;
+    }
 
     public String getLogradouro() {
         return logradouro;

@@ -6,9 +6,9 @@
 package persistencia;
 
 import java.util.List;
-import javax.persistence.NoResultException;
+import javax.persistence.*;
 import modelo.Usuario;
-import javax.persistence.Query;
+
 
 /**
  *

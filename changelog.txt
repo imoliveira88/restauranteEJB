@@ -1,0 +1,2 @@
+*Adicionada pasta com bibliotecas
+*Corrigido problema na cadastra_funcionario.xhtml

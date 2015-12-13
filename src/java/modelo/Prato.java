@@ -28,7 +28,6 @@ public class Prato implements Serializable {
         this.nome = nome;
         this.preco = preco;
         this.descricao = descricao;
-        this.imagem = imagem;
     }
     
     public Prato(String nome, double preco, String descricao, byte[] imagem){
