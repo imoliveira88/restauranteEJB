@@ -1,22 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import persistencia.*;
 
-/**
- *
- * @author Magalhães Oliveira
- */
 @ManagedBean(name = "cadastroC")
 @SessionScoped
 public class cadastroCliente{
@@ -33,6 +23,7 @@ public class cadastroCliente{
     private String telefone;
     private String senha;
     private String mensagem;
+    
     /**
      * Creates a new instance of cadastroCliente
      */

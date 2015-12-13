@@ -9,10 +9,6 @@ import javax.persistence.*;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-/**
- *
- * @author Magalhães Oliveira
- */
 @ManagedBean(name = "pedido")
 @SessionScoped
 @Entity

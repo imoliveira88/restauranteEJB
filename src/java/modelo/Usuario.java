@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 import java.io.Serializable;
@@ -12,17 +7,10 @@ import java.util.Objects;
 import javax.faces.FacesException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.el.EvaluationException;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.NotBlank;
 import persistencia.UsuarioDAOJPA;
-
-/**
- *
- * @author MagalhÃ£es Oliveira
- */
 
 @Entity
 @NamedQueries(value = {
