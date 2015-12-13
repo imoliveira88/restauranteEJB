@@ -10,8 +10,8 @@
     <h:body>
   
         <h:form>
-            <p:tabMenu activeIndex="2">
-                <p:menuitem value="Login" outcome="index.xhtml" iconPos="top"/>
+            <p:tabMenu activeIndex="0">
+                <p:menuitem value="Login" outcome="login.xhtml" iconPos="top"/>
                 <p:menuitem value="Home" outcome="home.xhtml" iconPos="top"/>
                 <p:menuitem value="Cardápio" outcome="cardapio.xhtml" iconPos="top"/>
                 <p:menuitem value="Contato" outcome="contato.xhtml" iconPos="top"/>
@@ -30,7 +30,6 @@
          
         <h:form>
             <p:growl id="msgs" showDetail="true" />
-
             <p:fieldset legend="Login" style="margin-bottom:20px">
                 <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
                 <h:panelGrid columns="2" cellpadding="5">
@@ -44,22 +43,16 @@
                     <h:commandButton value="Login" action="#{usuario.doLogin()}"/>
 
                     <f:facet name="footer">
-
                         <a href='faces/cadastro_cliente.xhtml'>Não tem cadastro? Clique aqui!</a>
                         <br/>
                         <br/>
                         <h:outputText value="#{cadastroC.mensagem}"/>
                         <br/>
                         <h:outputText value="#{usuario.mensagem}"/>
-                    </f:facet>  
-
+                    </f:facet>
                 </h:panelGrid>
             </p:fieldset>
         </h:form>
-            
-        
-        
-            
     </h:body>
 </html>
 
