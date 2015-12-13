@@ -32,7 +32,7 @@ public class UsuarioDAOJPA extends DAOGenericoJPA<Long, Usuario> implements Usua
             return (String) query.getSingleResult();
         }
         catch(NoResultException e){
-            return "";
+            return "  ";
         }
     }
     

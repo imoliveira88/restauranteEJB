@@ -39,13 +39,11 @@ public class BandeiraDAOJPA extends DAOGenericoJPA<Long, Bandeira> implements Ba
     }
     
     @Override
-    public void save(Bandeira b) {
+    public void save(Bandeira b){
         super.getEm().getTransaction().begin();
         if(!existeBandeira(b)){
             super.getEm().persist(b);
         }
-        else super.getEm().merge(b);
         super.getEm().getTransaction().commit();
     }
-    
 }

@@ -9,9 +9,11 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
+import javax.faces.FacesException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.el.EvaluationException;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.NotBlank;
@@ -70,6 +72,17 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "ID_ENDERECO", referencedColumnName = "ID_ENDERECO")
     private Endereco endereco;
     
+    @Transient
+    String mensagem;
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
+    
     public String getHorario() {
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
         return "Atualizado em " + sdf.format(new Date());
@@ -122,19 +135,23 @@ public class Usuario implements Serializable {
         return this.telefone.equals(ud.retornaSenha(this.telefone));
     }
     
-    public String doLogin() {
-        boolean valido = this.validaUsuario();
+    public String doLogin() throws FacesException,ExceptionInInitializerError{
+        boolean valido;
+        
+        try{
+            valido = this.validaUsuario();
+        }catch(ExceptionInInitializerError e){
+            valido = false;
+        }
          try {   
              if (!valido) {
-               FacesContext.getCurrentInstance().validationFailed();
-               return "/cadastro_cliente.xhtml?faces-redirect=true";
+               setMensagem("Login ou senha incorretos!");
+               return "/index.xhtml?faces-redirect=true";
              }
-             
              return "/cadastro_cliente.xhtml?faces-redirect=true";
-         } catch (Exception e) {
-             FacesContext.getCurrentInstance().validationFailed();
-             e.printStackTrace();
-             return "";
+         } catch (Exception ex) {
+             setMensagem("Login ou senha incorretos!");
+             return "/index.xhtml?faces-redirect=true";
          }
    
       }

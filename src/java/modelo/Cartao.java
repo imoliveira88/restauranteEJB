@@ -7,6 +7,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
@@ -84,6 +85,29 @@ public class Cartao implements Serializable{
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cartao other = (Cartao) obj;
+        if (!Objects.equals(this.bandeira, other.bandeira)) {
+            return false;
+        }
+        if (!Objects.equals(this.numero, other.numero)) {
+            return false;
+        }
+        if (!Objects.equals(this.validade, other.validade)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
   
 }
 

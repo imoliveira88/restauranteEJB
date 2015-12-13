@@ -8,12 +8,29 @@
         <title>Cadastro de Cliente</title>
     </h:head>
     <h:body>
+
+        <h:form>
+            <p:tabMenu activeIndex="2" >
+                <p:menuitem value="Login" outcome="index.xhtml" iconPos="top"/>
+                <p:menuitem value="Home" outcome="home.xhtml" iconPos="top"/>
+                <p:menuitem value="Cardápio" outcome="cardapio.xhtml" iconPos="top"/>
+                <p:menuitem value="Contato" outcome="contato.xhtml" iconPos="top"/>
+            </p:tabMenu>
+        </h:form>
+        
+        <br/>
+        <br/>
+        
+        <h2>Cadastro de cliente</h2>
+        
+        <br/>
+        <br/>
         
         <h:form>
             <p:growl id="msgs" showDetail="true" />
 
             <p:fieldset legend="Informações Básicas" style="margin-bottom:20px">
-                <h:panelGrid columns="2" id = "basico">
+                <h:panelGrid columns="2" id = "basico"  cellpadding="5">
 
                     <h:outputText value="Nome: " />
                     <h:inputText value="#{cadastroC.nome}" size="37" />
@@ -28,7 +45,7 @@
             </p:fieldset>
 
             <p:fieldset legend="Endereço" style="margin-bottom:20px">
-                <h:panelGrid columns="2" id = "endereco">
+                <h:panelGrid columns="2" id = "endereco"  cellpadding="5">
 
                     <h:outputText value="Tipo Logradouro: " />
                     <h:inputText value="#{cadastroC.tipologradouro}" size="10" />
@@ -52,7 +69,7 @@
             </p:fieldset>
 
             <p:fieldset legend="Informações do Cartão" style="margin-bottom:20px">
-                <h:panelGrid columns="2" id = "cartao">
+                <h:panelGrid columns="2" id = "cartao"  cellpadding="5">
 
                     <h:outputText value="Bandeira: " />
                     <h:inputText value="#{cadastroC.bandeira}" size="16" />
@@ -61,7 +78,7 @@
                     <h:inputText value="#{cadastroC.numeroCartao}" size="16" />
 
                     <h:outputText value="Validade: " />
-                    <h:inputText value="#{cadastroC.validade}" size="8" />
+                    <p:calendar value="#{cadastroC.validade}" />
 
                 </h:panelGrid>
             </p:fieldset>

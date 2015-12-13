@@ -153,12 +153,11 @@ public class cadastroCliente{
         Cartao cartao = new Cartao(band,numeroCartao,data);
         Endereco endereco = new Endereco(tipologradouro,logradouro,numero,cep,cidade,estado);
         Cliente cliente = new Cliente(nome,senha,telefone,endereco,cartao);
-        
 
         cli.save(cliente);
         
         this.setMensagem("Cadastro feito com sucesso! Realize login!");
         
-        return "index.xhtml?faces-redirect=true";
+        return "/index.xhtml?faces-redirect=true";
     }
 }
