@@ -5,11 +5,16 @@
  */
 package modelo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.NotBlank;
+import persistencia.FuncionarioDAO;
+import persistencia.FuncionarioDAOJPA;
 
 @ManagedBean(name = "funcionario")
 @SessionScoped
@@ -50,9 +55,5 @@ public class Funcionario extends Usuario {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
-    }
-    
-    public boolean salarioNegativoOuNulo(){
-        return this.salario <= 0;
     }
 }

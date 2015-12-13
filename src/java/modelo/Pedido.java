@@ -43,8 +43,19 @@ public class Pedido implements Serializable {
     @Column(name = "PEDIDO_TOTAL") 
     private double total;
     
+    @Column(name = "PEDIDO_ATENDIDO")
+    private char atendido;
+    
     public Long getId() {
         return id;
+    }
+
+    public char getAtendido() {
+        return atendido;
+    }
+
+    public void setAtendido(char atendido) {
+        this.atendido = atendido;
     }
 
     public void setId(Long id) {

@@ -5,13 +5,19 @@
  */
 package modelo;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.NotBlank;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
+import persistencia.PratoDAO;
+import persistencia.PratoDAOJPA;
 
 /**
  *
@@ -24,12 +30,15 @@ import javax.faces.bean.SessionScoped;
 public class Prato implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    public Prato(){}
+    public Prato(){
+        this.pratos = new ArrayList<>();
+    }
     
-    public Prato(String nome, double preco, String descricao){
+    public Prato(String nome, double preco, String descricao, byte[] imagem){
         this.nome = nome;
         this.preco = preco;
         this.descricao = descricao;
+        this.imagem = imagem;
     }
     
     @Id
@@ -51,6 +60,15 @@ public class Prato implements Serializable {
     @Size(min = 3, max = 40)
     @Column(name = "PRATO_DESCRICAO")
     private String descricao;
+    
+    @Column(name = "PRATO_IMAGEM")
+    private byte[] imagem;
+    
+    @Transient
+    private String mensagem;
+    
+    @Transient
+    private ArrayList<Prato> pratos;
 
     public Long getId() {
         return id;
@@ -58,6 +76,14 @@ public class Prato implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
 
     public String getNome() {
@@ -83,11 +109,45 @@ public class Prato implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-   
+
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    public ArrayList<Prato> getPratos() {
+        return pratos;
+    }
+
+    public void setPratos(ArrayList<Prato> pratos) {
+        this.pratos = pratos;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
+    
+    public String cadastraPrato(){
+        PratoDAO p = new PratoDAOJPA();
+        p.save(this);
+        setMensagem("Prato cadastrado com sucesso!");
+        pratos.add(this);
+        return "/funcionario/cadastro_prato.xhtml?faces-redirect=true";
+    }
     
     @Override
     public String toString() {
         return "Nome: " + this.nome + " Descrição: " + this.descricao + " Preco: " + this.preco;
+    }
+    
+    public void fileUpload(FileUploadEvent event) throws IOException {
+        try {
+            //Cria um arquivo UploadFile, para receber o arquivo do evento
+            UploadedFile arq = event.getFile();
+            //Transformar a imagem em bytes para salvar em banco de dados
+            this.imagem = event.getFile().getContents();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
     
 }
