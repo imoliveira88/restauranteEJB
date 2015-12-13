@@ -22,39 +22,7 @@
         <br/>
         <br/>
         
-            
-        <h:form>
-            <p:growl id="msgs" showDetail="true" />
-
-            <p:fieldset legend="Login" style="margin-bottom:20px">
-                <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-                <h:panelGrid columns="2" cellpadding="5">
-
-                    <h:outputText value="Login (telefone): " />
-                    <h:inputText value="#{usuario.telefone}" size="37" />
-
-                    <h:outputText value="Senha: " />
-                    <h:inputSecret value="#{usuario.senha}" size="37" />
-
-                    <h:commandButton value="Login" action="#{usuario.doLogin()}"/>
-
-                    <f:facet name="footer">
-
-                        <a href='faces/cadastro_cliente.xhtml'>Não tem cadastro? Clique aqui!</a>
-                        <br/>
-                        <br/>
-                        <h:outputText value="#{cadastroC.mensagem}"/>
-                        <br/>
-                        <h:outputText value="#{usuario.mensagem}"/>
-                    </f:facet>  
-
-                </h:panelGrid>
-            </p:fieldset>
-        </h:form>
-            
-        
-        
-            
+        <h2>A fazer</h2>
     </h:body>
 </html>
 
