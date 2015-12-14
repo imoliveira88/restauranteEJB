@@ -7,18 +7,15 @@ import java.util.Objects;
 import javax.faces.FacesException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.el.EvaluationException;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.NotBlank;
 import persistencia.UsuarioDAOJPA;
 
 @Entity
-@NamedQueries(value = {
-  @NamedQuery(name = "Usuario.RetornaSenha",
-              query= " SELECT u.senha FROM Usuario u " +
-                     " WHERE u.telefone = :tel")
-})
+@NamedQuery(name = "Usuario.RetornaSenha",
+            query= " SELECT u.senha FROM Usuario u " +
+                   " WHERE u.telefone = :tel")
 @Table(name = "TB_USUARIO")
 @ManagedBean(name = "usuario")
 @SessionScoped
@@ -121,27 +118,30 @@ public class Usuario implements Serializable {
     //compara a senha fornecida, com a senha que há no banco
     public boolean validaUsuario(){
         UsuarioDAOJPA ud = new UsuarioDAOJPA();
-        return this.telefone.equals(ud.retornaSenha(this.telefone));
+        return this.senha.equals(ud.retornaSenha(this.telefone));
     }
     
-    public String doLogin() throws FacesException,ExceptionInInitializerError,EvaluationException{
-        boolean valido;
+    public String doLogin() throws FacesException,ExceptionInInitializerError{
+        boolean valido = false;
+        String tipo;
         
         try{
             valido = this.validaUsuario();
         }catch(ExceptionInInitializerError e){
             valido = false;
         }
-         try {   
+        setMensagem("Válido: " + valido);  
              if (!valido) {
                setMensagem("Login ou senha incorretos!");
                return "/login.xhtml?faces-redirect=true";
              }
-             return "/cadastro_cliente.xhtml?faces-redirect=true";
-         } catch (Exception ex) {
-             setMensagem("Login ou senha incorretos!");
-             return "/login.xhtml?faces-redirect=true";
-         }
+             else{
+                 UsuarioDAOJPA ud = new UsuarioDAOJPA();
+                 tipo = ud.tipoUsuario(this);
+                 setMensagem("Tipo do usuário: " + tipo);
+                 if(tipo.equals("C")) return "/cliente/homeC.xhtml?faces-redirect=true";
+                 else return "/funcionario/homeF.xhtml?faces-redirect=true";
+             }
    
       }
     

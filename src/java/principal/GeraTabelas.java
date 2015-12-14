@@ -19,7 +19,7 @@ public class GeraTabelas {
         //Primeiro Bandeira 
         //testando método save;
         
-        Prato p = new Prato("Batata frita",5.98,"Outro prato bom!");
+        Prato p = new Prato();
         
         Endereco endereco = new Endereco("rua","professor Solto",23,"12.324-446","Recife","PE");
         Bandeira bandeira = new Bandeira("VISA");

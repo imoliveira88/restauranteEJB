@@ -10,18 +10,18 @@
     </h:head>
     <h:body>
         <h:form>
-            <p:tabMenu activeIndex="1">
-                <p:menuitem value="Login" outcome="login.xhtml" iconPos="top"/>
-                <p:menuitem value="Home" outcome="home.xhtml" iconPos="top"/>
-                <p:menuitem value="Cardápio" outcome="cardapio.xhtml" iconPos="top"/>
-                <p:menuitem value="Contato" outcome="contato.xhtml" iconPos="top"/>
+            <p:tabMenu activeIndex="-1" >
+                <p:menuitem value="Logout" outcome="/login.xhtml" iconPos="top"/>
+                <p:menuitem value="Home" outcome="/funcionario/homeF.xhtml" iconPos="top"/>
+                <p:menuitem value="Cadastro de Funcionários" outcome="/funcionario/cadastro_funcionario.xhtml" iconPos="top"/>
+                <p:menuitem value="Cadastro de Pratos" outcome="/funcionario/cadastro_prato.xhtml" iconPos="top"/>
             </p:tabMenu>
         </h:form>
 
         <br/>
         <br/>
         
-        <h2>Bem vindo ao sítio do Restaurante Foguete Brasileiro: onde sua conta explode!</h2>
+        <h2>Funcionário</h2>
         <br/>
         <br/>
         <p>Somos uma casa especializada em fazer o tradicional prato brasileiro, que é qualquer prato tradicional de qualquer lugar,

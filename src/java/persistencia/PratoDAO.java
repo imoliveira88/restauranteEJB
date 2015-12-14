@@ -5,6 +5,7 @@
  */
 package persistencia;
 
+import java.util.List;
 import modelo.Prato;
 
 /**
@@ -19,5 +20,5 @@ public interface PratoDAO {
  
     public void delete(Prato b);
  
-    //public List<Prato> findAll();
+    public List<Prato> findAll();
 }

@@ -4,15 +4,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import persistencia.*;
 
 @ManagedBean(name = "cadastroC")
-@SessionScoped
+@RequestScoped
 public class cadastroCliente{
     private String bandeira;
     private String numeroCartao;
-    private String validade;
+    private Date validade;
     private String tipologradouro;
     private String logradouro;
     private int numero;
@@ -62,11 +63,11 @@ public class cadastroCliente{
         this.cep = cep;
     }
 
-    public String getValidade() {
+    public Date getValidade() {
         return validade;
     }
 
-    public void setValidade(String validade) {
+    public void setValidade(Date validade) {
         this.validade = validade;
     }
 
@@ -137,11 +138,9 @@ public class cadastroCliente{
     public String cadastraCliente() throws ParseException{
         ClienteDAOJPA cli = new ClienteDAOJPA();
         
-        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");  
-        Date data = formatador.parse(validade);
         
         Bandeira band = new Bandeira(this.bandeira);
-        Cartao cartao = new Cartao(band,numeroCartao,data);
+        Cartao cartao = new Cartao(band,numeroCartao,validade);
         Endereco endereco = new Endereco(tipologradouro,logradouro,numero,cep,cidade,estado);
         Cliente cliente = new Cliente(nome,senha,telefone,endereco,cartao);
 
@@ -149,6 +148,6 @@ public class cadastroCliente{
         
         this.setMensagem("Cadastro feito com sucesso! Realize login!");
         
-        return "/index.xhtml?faces-redirect=true";
+        return "/login.xhtml?faces-redirect=true";
     }
 }

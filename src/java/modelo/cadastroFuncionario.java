@@ -2,11 +2,12 @@ package modelo;
 
 import java.text.ParseException;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import persistencia.*;
 
 @ManagedBean(name = "cadastroF")
-@SessionScoped
+@RequestScoped
 public class cadastroFuncionario{
     private String tipologradouro;
     private String logradouro;

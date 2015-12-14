@@ -25,7 +25,7 @@ public class UsuarioDAOJPA extends DAOGenericoJPA<Long, Usuario> implements Usua
     @Override
     public String retornaSenha(String telefone){
         Query query = super.getEm().createNamedQuery("Usuario.RetornaSenha");
-
+        
         query.setParameter("tel", telefone);
         
         try{
@@ -34,6 +34,18 @@ public class UsuarioDAOJPA extends DAOGenericoJPA<Long, Usuario> implements Usua
         catch(NoResultException e){
             return "  ";
         }
+    }
+    
+    public String tipoUsuario(Usuario usu){
+        String query = "select e.telefone from Cliente e where e.telefone = usu.telefone";
+        String tipo = (String) super.getEm().createQuery(query).getSingleResult();
+        try{
+            if(tipo != null) return "C";
+        }
+        catch(NoResultException e){
+            return "";
+        }
+        return "F";
     }
     
     public boolean existeUsuario(Usuario usu){

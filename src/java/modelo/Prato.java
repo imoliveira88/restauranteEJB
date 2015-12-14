@@ -8,11 +8,13 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.NotBlank;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.convert.FacesConverter;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 import persistencia.PratoDAO;
 import persistencia.PratoDAOJPA;
 
+@FacesConverter(forClass=Prato.class)   
 @ManagedBean(name = "prato")
 @SessionScoped
 @Entity
@@ -24,13 +26,8 @@ public class Prato implements Serializable {
         this.pratos = new ArrayList<>();
     }
     
-    public Prato(String nome, double preco, String descricao){
-        this.nome = nome;
-        this.preco = preco;
-        this.descricao = descricao;
-    }
     
-    public Prato(String nome, double preco, String descricao, byte[] imagem){
+    public Prato(String nome, double preco, String descricao, String imagem){
         this.nome = nome;
         this.preco = preco;
         this.descricao = descricao;
@@ -57,8 +54,9 @@ public class Prato implements Serializable {
     @Column(name = "PRATO_DESCRICAO")
     private String descricao;
     
+    //Nome da imagem, no diretório fotos
     @Column(name = "PRATO_IMAGEM")
-    private byte[] imagem;
+    private String imagem;
     
     @Transient
     private String mensagem;
@@ -106,7 +104,7 @@ public class Prato implements Serializable {
         this.nome = nome;
     }
 
-    public byte[] getImagem() {
+    public String getImagem() {
         return imagem;
     }
 
@@ -118,32 +116,13 @@ public class Prato implements Serializable {
         this.pratos = pratos;
     }
 
-    public void setImagem(byte[] imagem) {
+    public void setImagem(String imagem) {
         this.imagem = imagem;
-    }
-    
-    public String cadastraPrato(){
-        PratoDAO p = new PratoDAOJPA();
-        p.save(this);
-        setMensagem("Prato cadastrado com sucesso!");
-        pratos.add(this);
-        return "/funcionario/cadastro_prato.xhtml?faces-redirect=true";
     }
     
     @Override
     public String toString() {
-        return "Nome: " + this.nome + " Descrição: " + this.descricao + " Preco: " + this.preco;
-    }
-    
-    public void fileUpload(FileUploadEvent event) throws IOException {
-        try {
-            //Cria um arquivo UploadFile, para receber o arquivo do evento
-            UploadedFile arq = event.getFile();
-            //Transformar a imagem em bytes para salvar em banco de dados
-            this.imagem = event.getFile().getContents();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        return this.nome;
     }
     
 }

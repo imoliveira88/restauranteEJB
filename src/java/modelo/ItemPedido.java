@@ -5,6 +5,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import persistencia.ItemPedidoDAO;
+import persistencia.ItemPedidoDAOJPA;
 
 @ManagedBean(name = "itempedido")
 @SessionScoped
@@ -17,7 +19,7 @@ public class ItemPedido implements Serializable {
         this.prato = p;
         this.quantidade = q;
         this.pedido = ped;
-        this.setSubtotal();
+        this.subtotal = p.getPreco()*q;
     }
     
     public ItemPedido(){};
@@ -67,7 +69,7 @@ public class ItemPedido implements Serializable {
     }
 
     public double getSubtotal() {
-        return this.quantidade*this.prato.getPreco();
+        return this.subtotal;
     }
 
     public void setSubtotal(){
