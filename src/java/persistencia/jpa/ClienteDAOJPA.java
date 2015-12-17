@@ -3,23 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistencia;
+package persistencia.jpa;
 
-import modelo.Pedido;
-import javax.persistence.EntityManager;
+import modelo.Cliente;
+import persistencia.ClienteDAO;
 
 /**
  *
  * @author Iury
  */
-public class PedidoDAOJPA extends DAOGenericoJPA<Long, Pedido> implements PedidoDAO{
+public class ClienteDAOJPA extends DAOGenericoJPA<Long, Cliente> implements ClienteDAO{
 
-    public PedidoDAOJPA() {
+    public ClienteDAOJPA() {
         super();
     }
     
     @Override
-    public Pedido getById(long pk) {
+    public Cliente getById(long pk) {
         return super.getById(pk);
     }
+    
 }

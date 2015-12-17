@@ -5,10 +5,17 @@
  */
 package principal;
 
+import persistencia.jpa.CartaoDAOJPA;
+import persistencia.jpa.EnderecoDAOJPA;
+import persistencia.jpa.ClienteDAOJPA;
+import persistencia.jpa.PratoDAOJPA;
+import persistencia.jpa.BandeiraDAOJPA;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import modelo.*;
 import persistencia.*;
 
@@ -19,7 +26,8 @@ public class GeraTabelas {
         //Primeiro Bandeira 
         //testando método save;
         
-        Prato p = new Prato();
+        Prato p = new Prato("Filé com fritas",24.00,"Rapaz... é bom o bicho!","qualquerCaminho");
+        Prato p2 = new Prato("Filé com fritas",24.00,"Atualizado","CaminhoAtualizado");
         
         Endereco endereco = new Endereco("rua","professor Solto",23,"12.324-446","Recife","PE");
         Bandeira bandeira = new Bandeira("VISA");
@@ -28,17 +36,33 @@ public class GeraTabelas {
         Cartao cartao = new Cartao(bandeira,"234532432432",data);
         Cliente c = new Cliente("Igor","oxente","222",endereco,cartao);
         
+        BuilderCliente bc = new BuilderCliente();
+        bc.setC(c);
+        bc.criarNome("IgooooooooorBuilder");
+        bc.criarSenha();
+        
+        System.out.println("Nome: " + c.getNome() + " Senha criada: " + c.getSenha());
+        
         try{
-            PratoDAO fo = new PratoDAOJPA();
-            BandeiraDAO b = new BandeiraDAOJPA();
-            EnderecoDAO e = new EnderecoDAOJPA();
-            CartaoDAO car = new CartaoDAOJPA();
-            ClienteDAO cliente = new ClienteDAOJPA();
+            PratoDAO fo = (PratoDAO) FabricaObjetos.Fabrica(1, 8);
+            //BandeiraDAO b = new BandeiraDAOJPA();
+            EnderecoDAO e = (EnderecoDAO) FabricaObjetos.Fabrica(1,4);
+            //CartaoDAO car = new CartaoDAOJPA();
+            //ClienteDAO cliente = new ClienteDAOJPA();
             
             fo.save(p);
-            b.save(bandeira);
-            cliente.save(c);
-            car.save(cartao);
+            
+            List<Prato> pratos;
+            pratos = fo.findAll();
+            
+            for(Prato prato : pratos){
+                System.out.println(prato.toString());
+            }
+            
+            //e.save(endereco);
+            //b.save(bandeira);
+            //cliente.save(c);
+            //car.save(cartao);
             
         }catch(Exception e){
             System.out.println(e);

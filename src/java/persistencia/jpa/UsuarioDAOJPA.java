@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistencia;
+package persistencia.jpa;
 
 import java.util.List;
 import javax.persistence.*;
 import modelo.Usuario;
+import persistencia.UsuarioDAO;
 
 
 /**
@@ -37,8 +38,13 @@ public class UsuarioDAOJPA extends DAOGenericoJPA<Long, Usuario> implements Usua
     }
     
     public String tipoUsuario(Usuario usu){
-        String query = "select e.telefone from Cliente e where e.telefone = usu.telefone";
-        String tipo = (String) super.getEm().createQuery(query).getSingleResult();
+        String consulta = "select e.nome from Cliente e where e.telefone = :telefone";
+        TypedQuery<String> query = (TypedQuery<String>) super.getEm().createQuery(consulta);
+        
+        query.setParameter("telefone", usu.getTelefone());
+        
+        String tipo = query.getSingleResult();
+        
         try{
             if(tipo != null) return "C";
         }

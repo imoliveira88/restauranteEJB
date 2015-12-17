@@ -3,10 +3,11 @@ package modelo;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import persistencia.ItemPedidoDAO;
-import persistencia.ItemPedidoDAOJPA;
+import persistencia.jpa.ItemPedidoDAOJPA;
 
 @ManagedBean(name = "itempedido")
 @SessionScoped
@@ -69,7 +70,7 @@ public class ItemPedido implements Serializable {
     }
 
     public double getSubtotal() {
-        return this.subtotal;
+        return Math.round(100*this.subtotal)/100;
     }
 
     public void setSubtotal(){

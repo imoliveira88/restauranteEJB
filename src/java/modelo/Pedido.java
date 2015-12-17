@@ -19,6 +19,7 @@ public class Pedido implements Serializable {
         this.total = 0;
         this.itens = new ArrayList<>();
         this.data = new Date();
+        this.atendido = 'N';
     }
        
     @Id
@@ -76,7 +77,7 @@ public class Pedido implements Serializable {
     }
 
     public double getTotal() {
-        return this.total;
+        return Math.round(100*this.total)/100;
     }
 
     public Date getData() {

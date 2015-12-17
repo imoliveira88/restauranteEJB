@@ -61,7 +61,23 @@
                         </p:fieldset>
                     </h:form>
                 </td>
-            </tr>  
+            </tr>
+            <tr>
+                <td>
+                    <h:form>
+                        <p:fieldset legend="Remover Prato" style="margin-bottom:20px">
+                            <p:outputLabel value="Prato:" />
+                            <h:selectOneMenu value="#{pratoMB.prato}" style="width:125px" requiredMessage="Valor é obrigatório" converter="simpleConverter">
+                                <f:selectItems value="#{pratoMB.pratos}" var="prato" itemValue="#{prato}"/>
+                            </h:selectOneMenu>
+                            <f:attribute name="escolha" value="#{prato.nome}" />
+                            <h:commandButton value="Remover Item" action="#{pratoMB.excluir}"/>
+                        </p:fieldset>
+                    </h:form>
+                </td>
+                <td>
+                </td>
+            </tr>    
         </table>
 
 

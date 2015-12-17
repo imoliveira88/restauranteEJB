@@ -1,6 +1,6 @@
 package modelo;
 
-import java.io.IOException;
+import beans.BaseEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.*;
@@ -8,18 +8,15 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.NotBlank;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.convert.FacesConverter;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
-import persistencia.PratoDAO;
-import persistencia.PratoDAOJPA;
 
-@FacesConverter(forClass=Prato.class)   
 @ManagedBean(name = "prato")
 @SessionScoped
 @Entity
+@NamedQuery(name = "Prato.RetornaId",
+            query= " SELECT max(u.id) FROM Prato u " +
+                   " WHERE u.nome = :nome")
 @Table(name = "TB_PRATO")
-public class Prato implements Serializable {
+public class Prato implements Serializable, BaseEntity {
     private static final long serialVersionUID = 1L;
     
     public Prato(){

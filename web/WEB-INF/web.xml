@@ -31,6 +31,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>/faces/login.xhtml</welcome-file>
+        <welcome-file>/faces/home.xhtml?faces-redirect=true</welcome-file>
     </welcome-file-list>  
 </web-app>

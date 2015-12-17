@@ -16,7 +16,7 @@ public interface PratoDAO {
  
     public void save(Prato b);
  
-    //public void update(Prato b);
+    public void update(Prato b);
  
     public void delete(Prato b);
  

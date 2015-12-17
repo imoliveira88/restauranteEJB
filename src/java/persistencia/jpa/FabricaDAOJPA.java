@@ -1,4 +1,4 @@
-package persistencia;
+package persistencia.jpa;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

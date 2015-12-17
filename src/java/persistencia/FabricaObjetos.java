@@ -5,6 +5,8 @@
  */
 package persistencia;
 
+import persistencia.jpa.*;
+import persistencia.jdbc.*;
 import java.sql.SQLException;
 
 
@@ -16,35 +18,32 @@ import java.sql.SQLException;
  */
 
 public class FabricaObjetos {
-    private int persistencia;
-    private int classe;
     
     public static Object Fabrica(int persist, int classe)throws SQLException{
         switch(classe){
             case 1:
-                //if(persist == 1) return new BandeiraDAOJDBC();
-                return new BandeiraDAOJPA();
+                if(persist == 1) return (BandeiraDAO) new BandeiraDAOJPA();
+                else return (BandeiraDAO) new BandeiraDAOJDBC();
             case 2:
-                //if(persist == 1) return new CartaoDAOJDBC();
-                return new CartaoDAOJPA();
+                if(persist == 1) return (CartaoDAO) new CartaoDAOJPA();
+                else return (CartaoDAO) new CartaoDAOJDBC();
             case 3:
-                //if(persist == 1) return new ClienteDAOJDBC();
-                return new ClienteDAOJPA();
+                if(persist == 1) return (ClienteDAO) new ClienteDAOJPA();
+                else return (ClienteDAO) new ClienteDAOJDBC();
             case 4:
-                //if(persist == 1) return new EnderecoDAOJDBC();
-                return new EnderecoDAOJPA();
+                if(persist == 1) return (EnderecoDAO) new EnderecoDAOJPA();
+                else return (EnderecoDAO) new EnderecoDAOJDBC();
             case 5:
-                //if(persist == 1) return new FuncionarioDAOJDBC();
-                return new FuncionarioDAOJPA();
+                if(persist == 1) return (FuncionarioDAO) new FuncionarioDAOJPA();
+                else return (FuncionarioDAO) new FuncionarioDAOJDBC();
             case 6:
-                //if(persist == 1) return new ItemPedidoDAOJDBC();
-                return new ItemPedidoDAOJPA();
+                if(persist == 1) return (ItemPedidoDAO) new ItemPedidoDAOJPA();
+                else return (ItemPedidoDAO) new ItemPedidoDAOJDBC();
             case 7:
-                //if(persist == 1) return new PagementoDAOJDBC();
-                return new PedidoDAOJPA();
+                if(persist == 1) return (PedidoDAO) new PedidoDAOJPA();
             default:
-                //if(persist == 1) return (PratoDAO) new PratoDAOJDBC();
-                return (PratoDAO) new PratoDAOJPA();
+                if(persist == 1) return (PratoDAO) new PratoDAOJPA();
+                else return (PratoDAO) new PratoDAOJDBC();
         }
     }
 }

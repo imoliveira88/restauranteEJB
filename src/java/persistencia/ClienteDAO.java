@@ -17,9 +17,6 @@ public interface ClienteDAO {
  
     public void save(Cliente b);
  
-    public void update(Cliente b);
- 
     public void delete(Cliente b);
  
-    public List<Cliente> findAll();
 }

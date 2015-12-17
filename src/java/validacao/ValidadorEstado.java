@@ -1,4 +1,4 @@
-package modelo;
+package validacao;
 
 import java.util.ArrayList;
 import java.util.List;

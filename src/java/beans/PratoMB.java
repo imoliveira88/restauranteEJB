@@ -1,11 +1,12 @@
-package modelo;
+package beans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.Prato;
 import org.primefaces.event.FileUploadEvent;
-import persistencia.PratoDAOJPA;
+import persistencia.jpa.PratoDAOJPA;
 
 @ManagedBean(name = "pratoMB")
 @SessionScoped
@@ -45,7 +46,12 @@ public class PratoMB{
         PratoDAOJPA pra = new PratoDAOJPA();
         pra.save(prato);
         this.pratos.add(prato);
-
         this.prato = new Prato();
+    }
+    
+    public void excluir() {
+        PratoDAOJPA pra = new PratoDAOJPA();
+        pra.delete(prato);
+        this.pratos.remove(prato);
     }
 }

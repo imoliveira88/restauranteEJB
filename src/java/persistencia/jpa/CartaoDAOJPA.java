@@ -1,8 +1,9 @@
-package persistencia;
+package persistencia.jpa;
 
 import java.util.List;
 import modelo.Cartao;
 import javax.persistence.NoResultException;
+import persistencia.CartaoDAO;
 
 /**
  *

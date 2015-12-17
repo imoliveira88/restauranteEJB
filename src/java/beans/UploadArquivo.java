@@ -1,4 +1,4 @@
-package modelo;
+package beans;
 
 import java.io.File;
 import javax.faces.context.ExternalContext;

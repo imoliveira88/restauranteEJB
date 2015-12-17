@@ -3,23 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistencia;
+package persistencia.jpa;
 
-import modelo.Prato;
+import modelo.Funcionario;
 import javax.persistence.EntityManager;
+import persistencia.FuncionarioDAO;
 
 /**
  *
  * @author Iury
  */
-public class PratoDAOJPA extends DAOGenericoJPA<Long, Prato> implements PratoDAO{
+public class FuncionarioDAOJPA extends DAOGenericoJPA<Long, Funcionario> implements FuncionarioDAO{
 
-    public PratoDAOJPA() {
+    public FuncionarioDAOJPA() {
         super();
     }
-
-    public Prato getById(long pk) {
+    
+    @Override
+    public Funcionario getById(long pk) {
         return super.getById(pk);
     }
-    
 }

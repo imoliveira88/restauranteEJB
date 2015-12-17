@@ -10,7 +10,7 @@ import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.NotBlank;
-import persistencia.UsuarioDAOJPA;
+import persistencia.jpa.UsuarioDAOJPA;
 
 @Entity
 @NamedQuery(name = "Usuario.RetornaSenha",
@@ -138,7 +138,7 @@ public class Usuario implements Serializable {
              else{
                  UsuarioDAOJPA ud = new UsuarioDAOJPA();
                  tipo = ud.tipoUsuario(this);
-                 setMensagem("Tipo do usuário: " + tipo);
+                 setMensagem("");
                  if(tipo.equals("C")) return "/cliente/homeC.xhtml?faces-redirect=true";
                  else return "/funcionario/homeF.xhtml?faces-redirect=true";
              }
@@ -149,7 +149,7 @@ public class Usuario implements Serializable {
     public String toString(){
         String s = "";
         
-        s += "Nome: " + this.getNome() + " EndereÃ§o: " + this.getEndereco();
+        s += "Nome: " + this.getNome() + " Endereço: " + this.getEndereco();
         
         return s;
     }

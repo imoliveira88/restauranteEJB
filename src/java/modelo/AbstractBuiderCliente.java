@@ -3,20 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistencia;
-
-import java.util.List;
-import modelo.Endereco;
+package modelo;
 
 /**
  *
  * @author Magalhães Oliveira
  */
-public interface EnderecoDAO {
-    public Endereco getById(long pk);
- 
-    public void save(Endereco b);
- 
-    public void delete(Endereco b);
- 
+public interface AbstractBuiderCliente {
+    public void criarNome(String n);
+    public void criarSenha();
 }

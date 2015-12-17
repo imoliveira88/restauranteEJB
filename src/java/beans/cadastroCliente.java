@@ -1,14 +1,24 @@
-package modelo;
+package beans;
 
+import persistencia.jpa.ClienteDAOJPA;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import modelo.Bandeira;
+import modelo.Cartao;
+import modelo.Cliente;
+import modelo.Endereco;
 import persistencia.*;
 
-@ManagedBean(name = "cadastroF")
+@ManagedBean(name = "cadastroC")
 @RequestScoped
-public class cadastroFuncionario{
+public class cadastroCliente{
+    private String bandeira;
+    private String numeroCartao;
+    private Date validade;
     private String tipologradouro;
     private String logradouro;
     private int numero;
@@ -19,16 +29,16 @@ public class cadastroFuncionario{
     private String telefone;
     private String senha;
     private String mensagem;
-    private String cargo;
-    private Double salario;
-    
     
     /**
      * Creates a new instance of cadastroCliente
      */
-    public cadastroFuncionario() {
+    public cadastroCliente() {
     }
 
+    public String getBandeira() {
+        return bandeira;
+    }
 
     public String getMensagem() {
         return mensagem;
@@ -38,6 +48,17 @@ public class cadastroFuncionario{
         this.mensagem = mensagem;
     }
 
+    public void setBandeira(String bandeira) {
+        this.bandeira = bandeira;
+    }
+
+    public String getNumeroCartao() {
+        return numeroCartao;
+    }
+
+    public void setNumeroCartao(String numeroCartao) {
+        this.numeroCartao = numeroCartao;
+    }
 
     public String getCep() {
         return cep;
@@ -47,12 +68,20 @@ public class cadastroFuncionario{
         this.cep = cep;
     }
 
-    public void setTipologradouro(String tipologradouro) {
-        this.tipologradouro = tipologradouro;
+    public Date getValidade() {
+        return validade;
     }
-    
+
+    public void setValidade(Date validade) {
+        this.validade = validade;
+    }
+
     public String getTipologradouro() {
         return tipologradouro;
+    }
+
+    public void setTipologradouro(String tipologradouro) {
+        this.tipologradouro = tipologradouro;
     }
 
     public String getLogradouro() {
@@ -109,34 +138,21 @@ public class cadastroFuncionario{
 
     public void setSenha(String senha) {
         this.senha = senha;
-    } 
-
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
-
-    public Double getSalario() {
-        return salario;
-    }
-
-    public void setSalario(Double salario) {
-        this.salario = salario;
-    }
+    }  
     
-    public String cadastraFuncionario() throws ParseException{
-        FuncionarioDAO funcionario = new FuncionarioDAOJPA();
+    public String cadastraCliente() throws ParseException{
+        ClienteDAOJPA cli = new ClienteDAOJPA();
         
+        
+        Bandeira band = new Bandeira(this.bandeira);
+        Cartao cartao = new Cartao(band,numeroCartao,validade);
         Endereco endereco = new Endereco(tipologradouro,logradouro,numero,cep,cidade,estado);
-        Funcionario func = new Funcionario(nome,senha,telefone,endereco,salario,cargo);
+        Cliente cliente = new Cliente(nome,senha,telefone,endereco,cartao);
 
-        funcionario.save(func);
+        cli.save(cliente);
         
-        this.setMensagem("Cadastro feito com sucesso!");
+        this.setMensagem("Cadastro feito com sucesso! Realize login!");
         
-        return "/funcionario/cadastro_funcionario.xhtml?faces-redirect=true";
+        return "/login.xhtml?faces-redirect=true";
     }
 }
