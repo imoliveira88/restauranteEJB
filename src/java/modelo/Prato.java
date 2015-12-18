@@ -3,6 +3,7 @@ package modelo;
 import beans.BaseEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.NotBlank;
@@ -56,9 +57,6 @@ public class Prato implements Serializable, BaseEntity {
     private String imagem;
     
     @Transient
-    private String mensagem;
-    
-    @Transient
     private ArrayList<Prato> pratos;
 
     public Long getId() {
@@ -67,14 +65,6 @@ public class Prato implements Serializable, BaseEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getMensagem() {
-        return mensagem;
-    }
-
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
     }
 
     public String getNome() {
@@ -121,5 +111,22 @@ public class Prato implements Serializable, BaseEntity {
     public String toString() {
         return this.nome;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    public boolean equals(Prato outro) {
+        if (outro == null) {
+            System.out.println("NULO ");
+            return false;   
+        }
+        System.out.println("Nome 1: " + this.nome + "    Nome 2: " + outro.nome);
+        return this.nome.equals(outro.nome); 
+    }
+    
+    
     
 }

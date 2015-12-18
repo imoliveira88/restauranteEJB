@@ -33,7 +33,7 @@ public class Pedido implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE")
     private Cliente cliente;
-    
+   
     @Column(name = "PEDIDO_DATA")
     private Date data;
 

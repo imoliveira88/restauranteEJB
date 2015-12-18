@@ -29,9 +29,9 @@ public class EnderecoDAOJPA extends DAOGenericoJPA<Long, Endereco> implements En
         String query = "select e from Endereco e";
         List<Endereco> enderecos = super.getEm().createQuery(query, Endereco.class).getResultList();
         try{
-            for(Endereco endere : enderecos){
-                if(endere.equals(end)) return true;
-                        }
+            for(Endereco endereco : enderecos){
+                if(endereco.equals(end)) return true;
+            }
             return false;
         }
         catch(NoResultException e){

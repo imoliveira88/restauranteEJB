@@ -9,7 +9,6 @@ package modelo;
  *
  * @author Magalhães Oliveira
  */
-public interface AbstractBuiderCliente {
-    public void criarNome(String n);
-    public void criarSenha();
+public interface EstrategiaAbstrata {
+    public String geraSenha();
 }

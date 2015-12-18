@@ -6,8 +6,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import persistencia.ItemPedidoDAO;
-import persistencia.jpa.ItemPedidoDAOJPA;
 
 @ManagedBean(name = "itempedido")
 @SessionScoped

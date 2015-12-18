@@ -22,12 +22,10 @@ import persistencia.*;
 public class GeraTabelas {
    
     public static void main(String[] args) throws ParseException, SQLException {
-        
-        //Primeiro Bandeira 
-        //testando método save;
+       
         
         Prato p = new Prato("Filé com fritas",24.00,"Rapaz... é bom o bicho!","qualquerCaminho");
-        Prato p2 = new Prato("Filé com fritas",24.00,"Atualizado","CaminhoAtualizado");
+        Prato p2 = new Prato("Filé com fritas",24.00,"JPA","CaminhoASDDFDFtualizado");
         
         Endereco endereco = new Endereco("rua","professor Solto",23,"12.324-446","Recife","PE");
         Bandeira bandeira = new Bandeira("VISA");
@@ -36,17 +34,18 @@ public class GeraTabelas {
         Cartao cartao = new Cartao(bandeira,"234532432432",data);
         Cliente c = new Cliente("Igor","oxente","222",endereco,cartao);
         
-        BuilderCliente bc = new BuilderCliente();
-        bc.setC(c);
-        bc.criarNome("IgooooooooorBuilder");
-        bc.criarSenha();
+        EstrategiaAbstrata ea = new EstrategiaAleatoria();
+        String senha1 = ea.geraSenha();
         
-        System.out.println("Nome: " + c.getNome() + " Senha criada: " + c.getSenha());
+        EstrategiaAbstrata ep = new EstrategiaPadrao();
+        String senha2 = ep.geraSenha();
+        
+        System.out.println("Senha aleatória: " + senha1 + "  Senha padrão: " + senha2);
         
         try{
             PratoDAO fo = (PratoDAO) FabricaObjetos.Fabrica(1, 8);
             //BandeiraDAO b = new BandeiraDAOJPA();
-            EnderecoDAO e = (EnderecoDAO) FabricaObjetos.Fabrica(1,4);
+            //EnderecoDAO e = (EnderecoDAO) FabricaObjetos.Fabrica(1,4);
             //CartaoDAO car = new CartaoDAOJPA();
             //ClienteDAO cliente = new ClienteDAOJPA();
             

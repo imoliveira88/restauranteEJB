@@ -37,21 +37,21 @@ public class UsuarioDAOJPA extends DAOGenericoJPA<Long, Usuario> implements Usua
         }
     }
     
-    public String tipoUsuario(Usuario usu){
-        String consulta = "select e.nome from Cliente e where e.telefone = :telefone";
-        TypedQuery<String> query = (TypedQuery<String>) super.getEm().createQuery(consulta);
+    public String tipoUsuario(Usuario usu)throws NoResultException{
+        Query query = super.getEm().createNamedQuery("Usuario.loginCliente");
         
         query.setParameter("telefone", usu.getTelefone());
         
-        String tipo = query.getSingleResult();
+        String tipoC = "";
         
         try{
-            if(tipo != null) return "C";
+            tipoC = (String) query.getSingleResult();
+            if(tipoC != "") return "C";
+            else return "F";
         }
         catch(NoResultException e){
-            return "";
+            return "F";
         }
-        return "F";
     }
     
     public boolean existeUsuario(Usuario usu){
@@ -74,7 +74,6 @@ public class UsuarioDAOJPA extends DAOGenericoJPA<Long, Usuario> implements Usua
         if(!existeUsuario(b)){
             super.getEm().persist(b);
         }
-        else super.getEm().merge(b);
         super.getEm().getTransaction().commit();
     }
     

@@ -27,7 +27,6 @@ import persistencia.jpa.PratoDAOJPA;
 @SessionScoped
 public class PedidoMB{
     private Pedido pedido;
-    private PedidoDAO pd;
     private int quantidade;
     private Prato prato;
     private List<ItemPedido> itens;
@@ -37,7 +36,6 @@ public class PedidoMB{
     public PedidoMB(){
         this.itens = new ArrayList<>();
         this.pedido = new Pedido();
-        this.pd = new PedidoDAOJPA();
     }
 
     public String getMensagem() {
@@ -72,14 +70,6 @@ public class PedidoMB{
         this.pedido = pedido;
     }
 
-    public PedidoDAO getPd() {
-        return pd;
-    }
-
-    public void setPd(PedidoDAO pd) {
-        this.pd = pd;
-    }
-
     public int getQuantidade() {
         return quantidade;
     }
@@ -94,6 +84,7 @@ public class PedidoMB{
         pedido.addItem(ip);
         this.addItem(ip);
         
+        
         setMensagem("Item adicionado ao pedido!");
         return "/faces/cliente/pedido.xhtml";
     }
@@ -104,6 +95,7 @@ public class PedidoMB{
         
         setMensagem("Pedido realizado!");
         this.itens = new ArrayList<>();
+        this.pedido = new Pedido();
         return "/faces/cliente/pedido.xhtml";
     }
     

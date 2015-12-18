@@ -13,9 +13,9 @@ import org.hibernate.validator.constraints.NotBlank;
 import persistencia.jpa.UsuarioDAOJPA;
 
 @Entity
-@NamedQuery(name = "Usuario.RetornaSenha",
-            query= " SELECT u.senha FROM Usuario u " +
-                   " WHERE u.telefone = :tel")
+@NamedQueries(value = 
+        {@NamedQuery(name = "Usuario.RetornaSenha", query= " SELECT u.senha FROM Usuario u WHERE u.telefone = :tel"),
+         @NamedQuery(name = "Usuario.loginCliente", query = "SELECT max(e.id) FROM Cliente e WHERE e.telefone = :telefone")})
 @Table(name = "TB_USUARIO")
 @ManagedBean(name = "usuario")
 @SessionScoped
@@ -130,7 +130,6 @@ public class Usuario implements Serializable {
         }catch(ExceptionInInitializerError e){
             valido = false;
         }
-        setMensagem("Válido: " + valido);  
              if (!valido) {
                setMensagem("Login ou senha incorretos!");
                return "/login.xhtml?faces-redirect=true";
@@ -161,19 +160,10 @@ public class Usuario implements Serializable {
         return hash;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Usuario other = (Usuario) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+    public boolean equals(Usuario usu) {
+        if (usu == null) return false;
+        
+        return this.nome.equals(usu.nome);
     }
     
     

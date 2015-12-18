@@ -35,7 +35,7 @@ public class ExceptionHandlerServlet extends HttpServlet {
             out.write("<h1>Página não encontrada. Clique <a href='home.xhtml?faces-redirect=true'>aqui</a> para voltar à Home Page.</h1>");
          }
         else{
-            out.write("<h1>Ocorreu um erro. Clique <a href='home.xhtml?faces-redirect=true'>aqui</a> para voltar à Home Page.</h1>");
+            out.write("<h1>Ocorreu um erro. Clique <a href='/faces/home.xhtml?faces-redirect=true'>aqui</a> para voltar à Home Page.</h1>");
         }
         out.write("</body></html>");
     }

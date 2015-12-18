@@ -30,7 +30,7 @@ public class Bandeira implements Serializable {
     @Column(name = "ID_BANDEIRA")
     private Long id;
     
-    @OneToMany(mappedBy = "bandeira", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "bandeira", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private final List<Cartao> cartoes;
     
     @NotBlank
@@ -67,11 +67,6 @@ public class Bandeira implements Serializable {
   
     public boolean equals(Bandeira band) {
         return this.nome.equals(band.nome);
-    }
-
-    @Override
-    public String toString() {
-        return "corporativo.corporativo3.Bandeira[ id=" + id + " ]";
-    }
+    }   
     
 }

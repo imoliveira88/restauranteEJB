@@ -46,7 +46,6 @@
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.format_sql" value="true"/>
-      <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
     </properties>
   </persistence-unit>
 </persistence>
