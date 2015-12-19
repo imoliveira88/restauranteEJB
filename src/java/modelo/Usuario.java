@@ -125,22 +125,21 @@ public class Usuario implements Serializable {
         boolean valido = false;
         String tipo;
         
-        try{
-            valido = this.validaUsuario();
-        }catch(ExceptionInInitializerError e){
-            valido = false;
+        valido = this.validaUsuario();
+       
+        if (!valido) {
+            setMensagem("Login ou senha incorretos!");
+            return "/login.xhtml?faces-redirect=true";
+        } else {
+            UsuarioDAOJPA ud = new UsuarioDAOJPA();
+            tipo = ud.tipoUsuario(this);
+            setMensagem("");
+            if (tipo.equals("C")) {
+                return "/cliente/homeC.xhtml?faces-redirect=true";
+            } else {
+                return "/funcionario/homeF.xhtml?faces-redirect=true";
+            }
         }
-             if (!valido) {
-               setMensagem("Login ou senha incorretos!");
-               return "/login.xhtml?faces-redirect=true";
-             }
-             else{
-                 UsuarioDAOJPA ud = new UsuarioDAOJPA();
-                 tipo = ud.tipoUsuario(this);
-                 setMensagem("");
-                 if(tipo.equals("C")) return "/cliente/homeC.xhtml?faces-redirect=true";
-                 else return "/funcionario/homeF.xhtml?faces-redirect=true";
-             }
    
       }
     

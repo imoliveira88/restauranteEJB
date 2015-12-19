@@ -46,8 +46,12 @@ public class PratoDAOJPA extends DAOGenericoJPA<Long, Prato> implements PratoDAO
         List<Prato> pratos = super.getEm().createQuery(query, Prato.class).getResultList();
         try{
             for(Prato prato : pratos){
-                if(prato.equals(p)) return true;
+                if(prato.equals(p)){
+                    System.out.println("RETORNOU VERDADEIROO");
+                    return true;
+                }
             }
+            System.out.println("RETORNOU FALSO");
             return false;
         }
         catch(NoResultException e){
@@ -57,8 +61,8 @@ public class PratoDAOJPA extends DAOGenericoJPA<Long, Prato> implements PratoDAO
     
     @Override
     public void save(Prato b) {
-        super.getEm().getTransaction().begin();
         if(!existePrato(b)){
+            super.getEm().getTransaction().begin();
             super.getEm().persist(b);
             super.getEm().getTransaction().commit();
         }

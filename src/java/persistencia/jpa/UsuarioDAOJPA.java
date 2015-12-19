@@ -42,11 +42,11 @@ public class UsuarioDAOJPA extends DAOGenericoJPA<Long, Usuario> implements Usua
         
         query.setParameter("telefone", usu.getTelefone());
         
-        String tipoC = "";
+        long tipoC = 0;
         
         try{
-            tipoC = (String) query.getSingleResult();
-            if(tipoC != "") return "C";
+            tipoC = (Long) query.getSingleResult();
+            if(tipoC != 0) return "C";
             else return "F";
         }
         catch(NoResultException e){

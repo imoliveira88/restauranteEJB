@@ -85,7 +85,7 @@ public class PratoDAOJDBC implements PratoDAO{
         List<Prato> pratos = new ArrayList<>();
         try {
             Prato prato;
-            stmt = con.prepareStatement("SELECT * FROM tb_prato");
+            stmt = con.prepareStatement("SELECT * FROM tb_prato ORDER BY nome");
             rs = stmt.executeQuery();
             while (rs.next()) {
                 prato = new Prato();

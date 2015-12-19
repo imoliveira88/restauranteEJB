@@ -44,7 +44,7 @@ import javax.faces.convert.FacesConverter;
     }
 
     protected void addAttribute(UIComponent component, BaseEntity o) {
-        String key = o.getId().toString(); // codigo da empresa como chave neste caso  
+        String key = o.getId().toString(); 
         this.getAttributesFrom(component).put(key, o);
     }
 

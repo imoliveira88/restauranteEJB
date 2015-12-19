@@ -44,9 +44,11 @@ public class PratoMB{
 
     public void salvar() {
         PratoDAOJPA pra = new PratoDAOJPA();
-        pra.save(prato);
-        this.pratos.add(prato);
-        this.prato = new Prato();
+        if(!pra.existePrato(this.prato)){
+            pra.save(prato);
+            this.pratos.add(prato);
+            this.prato = new Prato();
+        }
     }
     
     public void excluir() {

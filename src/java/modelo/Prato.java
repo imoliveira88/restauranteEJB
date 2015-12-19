@@ -112,12 +112,6 @@ public class Prato implements Serializable, BaseEntity {
         return this.nome;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
-    }
-
     public boolean equals(Prato outro) {
         if (outro == null) {
             System.out.println("NULO ");
