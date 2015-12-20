@@ -60,6 +60,13 @@ public class PratoDAOJPA extends DAOGenericoJPA<Long, Prato> implements PratoDAO
     }
     
     @Override
+    public List<Prato> findAll() {
+        String query = "SELECT e FROM Prato e ORDER BY e.nome";
+        List<Prato> pratos = super.getEm().createQuery(query, Prato.class).getResultList();
+        return pratos;
+    }
+    
+    @Override
     public void save(Prato b) {
         if(!existePrato(b)){
             super.getEm().getTransaction().begin();

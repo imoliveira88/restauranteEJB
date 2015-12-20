@@ -13,11 +13,8 @@ import javax.faces.bean.SessionScoped;
 import modelo.ItemPedido;
 import modelo.Pedido;
 import modelo.Prato;
-import persistencia.ItemPedidoDAO;
-import persistencia.jpa.ItemPedidoDAOJPA;
 import persistencia.PedidoDAO;
 import persistencia.jpa.PedidoDAOJPA;
-import persistencia.jpa.PratoDAOJPA;
 
 /**
  *

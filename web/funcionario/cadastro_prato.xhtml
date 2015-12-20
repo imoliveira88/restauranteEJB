@@ -36,6 +36,20 @@
                             </h:panelGrid> 
                         </p:fieldset>
                     </h:form>
+                    
+                    <h:form>
+                        <p:fieldset legend="Remover Prato" style="margin-bottom:20px">
+                            <p:outputLabel value="Prato:" />
+                            <h:selectOneMenu value="#{pratoMB.prato}" style="width:125px" requiredMessage="Valor é obrigatório" converter="simpleConverter">
+                                <f:selectItems value="#{pratoMB.pratos}" var="prato" itemValue="#{prato}"/>
+                            </h:selectOneMenu>
+                            <f:attribute name="escolha" value="#{prato.nome}" />
+                            
+                            <br/>
+                            <h:commandButton value="Remover Item" action="#{pratoMB.excluir}"/>
+                        </p:fieldset>
+                    </h:form>
+                    
                 </td>
                 <td>
                     <h:form enctype="multipart/form-data">
@@ -43,7 +57,7 @@
                             <h:dataTable var="prato" value="#{pratoMB.pratos}" >
                                 <h:column>
                                     <f:facet name="header">Foto</f:facet>
-                                    <h:graphicImage value="/imagens/#{prato.imagem}" width="100px" height="100px"/>
+                                    <h:graphicImage value="/imagens/#{prato.imagem}" width="100" height="100"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">Nome</f:facet>
@@ -60,24 +74,9 @@
                             </h:dataTable>
                         </p:fieldset>
                     </h:form>
+                     
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <h:form>
-                        <p:fieldset legend="Remover Prato" style="margin-bottom:20px">
-                            <p:outputLabel value="Prato:" />
-                            <h:selectOneMenu value="#{pratoMB.prato}" style="width:125px" requiredMessage="Valor é obrigatório" converter="simpleConverter">
-                                <f:selectItems value="#{pratoMB.pratos}" var="prato" itemValue="#{prato}"/>
-                            </h:selectOneMenu>
-                            <f:attribute name="escolha" value="#{prato.nome}" />
-                            <h:commandButton value="Remover Item" action="#{pratoMB.excluir}"/>
-                        </p:fieldset>
-                    </h:form>
-                </td>
-                <td>
-                </td>
-            </tr>    
         </table>
 
 
