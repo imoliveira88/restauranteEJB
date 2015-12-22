@@ -20,7 +20,7 @@ public interface BandeiraDAO {
  
     public void update(Bandeira b);
  
-    public void delete(Bandeira b);
+    public void delete(Bandeira b) throws Exception;
  
     public List<Bandeira> findAll();
     

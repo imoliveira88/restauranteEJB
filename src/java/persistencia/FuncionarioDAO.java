@@ -19,7 +19,7 @@ public interface FuncionarioDAO {
  
     public void update(Funcionario b);
  
-    public void delete(Funcionario b);
+    public void delete(Funcionario b) throws Exception;
  
     public List<Funcionario> findAll();
 }

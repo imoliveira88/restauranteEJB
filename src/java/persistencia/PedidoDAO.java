@@ -19,7 +19,7 @@ public interface PedidoDAO {
  
     public void update(Pedido b);
  
-    public void delete(Pedido b);
+    public void delete(Pedido b) throws Exception;
  
     public List<Pedido> findAll();
 }

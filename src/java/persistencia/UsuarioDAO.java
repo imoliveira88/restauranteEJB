@@ -17,7 +17,7 @@ public interface UsuarioDAO {
  
     public void save(Usuario b);
  
-    public void delete(Usuario b);
+    public void delete(Usuario b) throws Exception;
     
     public String retornaSenha(String telefone);
  

@@ -18,7 +18,7 @@ public interface PratoDAO {
  
     public void update(Prato b);
  
-    public void delete(Prato b);
+    public void delete(Prato b)  throws Exception;
  
     public List<Prato> findAll();
 }

@@ -38,12 +38,20 @@
                                     <h:outputText value="#{pedido.cliente.nome}"/>
                                 </p:column>
                                 <p:column>
+                                    <f:facet name="header">Endereço de Entrega</f:facet>
+                                    <h:outputText value="#{pedido.imprimeEndereco()}"/>
+                                </p:column>
+                                <p:column>
                                     <f:facet name="header">Data</f:facet>
                                     <h:outputText value="#{pedido.data}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">Total</f:facet>
                                     <h:outputText value="#{pedido.total}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">Itens do Pedido</f:facet>
+                                    <h:outputText value="#{pedido.imprimeItens()}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">Atender</f:facet>

@@ -19,7 +19,7 @@ public interface CartaoDAO {
  
     public void update(Cartao b);
  
-    public void delete(Cartao b);
+    public void delete(Cartao b) throws Exception;
  
     public List<Cartao> findAll();
 }

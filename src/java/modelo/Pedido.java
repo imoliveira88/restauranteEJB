@@ -14,9 +14,9 @@ import persistencia.jpa.PedidoDAOJPA;
 @SessionScoped
 @Entity
 @NamedQueries(value = 
-        {@NamedQuery(name = "Pedido.NaoAtendido", query= " SELECT u FROM Pedido u WHERE u.atendido = 'N'"),
+        {@NamedQuery(name = "Pedido.NaoAtendido", query= " SELECT u FROM Pedido u WHERE u.atendido = 'N'  ORDER BY u.data DESC"),
          @NamedQuery(name = "Pedido.Atende", query= " UPDATE Pedido u SET u.atendido = 'S' WHERE u.id = :id"),
-         @NamedQuery(name = "Pedido.Atendido", query= " SELECT u FROM Pedido u WHERE u.atendido = 'S'")})
+         @NamedQuery(name = "Pedido.Atendido", query= " SELECT u FROM Pedido u WHERE u.atendido = 'S'   ORDER BY u.data DESC")})
 @Table(name="TB_PEDIDO")
 public class Pedido implements Serializable {
     
@@ -105,6 +105,20 @@ public class Pedido implements Serializable {
         PedidoDAOJPA pd = new PedidoDAOJPA();
         pd.pedidoAtende(id);
         return "/faces/funcionario/pedidos.xhtml";
+    }
+    
+    public String imprimeItens(){
+        String texto = "";
+        for(ItemPedido item : itens){
+            texto += "Quantidade: " + item.getQuantidade() + ", Prato: " + item.getPrato().getNome() + "\n";
+        }
+        return texto;
+    }
+    
+    public String imprimeEndereco(){
+        String texto = "";
+        texto += this.cliente.getEndereco().toString();
+        return texto;
     }
     
 }

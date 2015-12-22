@@ -5,6 +5,7 @@
  */
 package persistencia.jpa;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import java.util.List;
 import modelo.Prato;
 import javax.persistence.EntityManager;
@@ -22,8 +23,8 @@ public class PratoDAOJPA extends DAOGenericoJPA<Long, Prato> implements PratoDAO
         super();
     }
     
-    @Override
-    public void delete(Prato prato) {
+    //@Override
+    public void delete(Prato prato) throws Exception{
         super.getEm().getTransaction().begin();
         Query query = super.getEm().createNamedQuery("Prato.RetornaId");
         query.setParameter("nome", prato.getNome());
@@ -32,9 +33,13 @@ public class PratoDAOJPA extends DAOGenericoJPA<Long, Prato> implements PratoDAO
         
         Prato p = super.getEm().find(Prato.class,id);
         
-        super.getEm().remove(p);
-        System.out.println("Apagandoooo");
-        super.getEm().getTransaction().commit();
+        try{
+            super.getEm().remove(p);
+            System.out.println("Apagandoooo");
+            super.getEm().getTransaction().commit();
+        }catch(Exception e){
+            
+        }
     }
 
     public Prato getById(long pk) {

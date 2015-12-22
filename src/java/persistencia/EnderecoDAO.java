@@ -17,6 +17,6 @@ public interface EnderecoDAO {
  
     public void save(Endereco b);
  
-    public void delete(Endereco b);
+    public void delete(Endereco b) throws Exception;
  
 }

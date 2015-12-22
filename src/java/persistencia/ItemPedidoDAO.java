@@ -16,6 +16,6 @@ public interface ItemPedidoDAO {
  
     public void save(ItemPedido b);
  
-    public void delete(ItemPedido b);
+    public void delete(ItemPedido b) throws Exception;
  
 }

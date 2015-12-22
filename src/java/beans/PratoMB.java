@@ -66,7 +66,7 @@ public class PratoMB{
         }
     }
     
-    public String excluir() {
+    public String excluir() throws Exception{
         PratoDAOJPA pra = new PratoDAOJPA();
         pra.delete(prato);
         this.pratos.remove(prato);

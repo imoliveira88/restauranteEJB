@@ -43,7 +43,7 @@ public class DAOGenericoJPA<PK, T> {
         em.getTransaction().commit();
     }
  
-    public void delete(T entity) {
+    public void delete(T entity) throws Exception{
         em.getTransaction().begin();
         em.remove(entity);
         em.getTransaction().commit();

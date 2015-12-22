@@ -134,7 +134,7 @@ public class Endereco implements Serializable {
 
     @Override
     public String toString() {
-        return "EndereÃ§o: " + this.getTipoLogradouro() + " " + this.getLogradouro() + ", " + this.getNumero() + ", " + this.getCep() + ", " + this.getCidade() + "-" + this.getEstado();
+        return "Endereço: " + this.getTipoLogradouro() + " " + this.getLogradouro() + ", " + this.getNumero() + ", " + this.getCep() + ", " + this.getCidade() + "-" + this.getEstado();
     }
     
 }
