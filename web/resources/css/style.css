@@ -1,0 +1,28 @@
+body {
+    background-color: #cfc;
+}
+
+menuItem{
+    color: red;
+}
+
+.formGeral{
+    width: 40%;
+    margin: 0 auto;
+}
+
+*{
+    font-family: Verdana;
+}
+
+.botao{
+    border: solid black 2px;
+    width: 110px;
+    height: 40px;
+    background-color: green;
+    font-weight: bold;
+}
+
+h2{
+    text-align: center;
+}

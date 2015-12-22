@@ -6,6 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Cadastro de Cliente</title>
+        <h:outputStylesheet library="css" name="style.css" />
     </h:head>
     <h:body>
 
@@ -26,7 +27,7 @@
         <br/>
         <br/>
         
-        <h:form>
+        <h:form class="formGeral">
             <p:growl id="msgs" showDetail="true" />
 
             <p:fieldset legend="Informações Básicas" style="margin-bottom:20px">
@@ -83,7 +84,7 @@
                 </h:panelGrid>
             </p:fieldset>
 
-            <h:commandButton value="Enviar" action="#{cadastroC.cadastraCliente}"/>
+            <h:commandButton class="botao" value="Enviar" action="#{cadastroC.cadastraCliente}"/>
 
         </h:form>  
         
