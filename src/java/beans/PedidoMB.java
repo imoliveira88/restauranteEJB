@@ -10,10 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import modelo.Cliente;
 import modelo.ItemPedido;
 import modelo.Pedido;
 import modelo.Prato;
 import persistencia.PedidoDAO;
+import persistencia.jpa.ClienteDAOJPA;
 import persistencia.jpa.PedidoDAOJPA;
 
 /**
@@ -86,8 +88,9 @@ public class PedidoMB{
         return "/faces/cliente/pedido.xhtml";
     }
     
-    public String fechaPedido(){
+    public String fechaPedido(long id_cliente){
         PedidoDAO pedidoDAO = new PedidoDAOJPA();
+        this.pedido.setCliente(new ClienteDAOJPA().getById(id_cliente));
         pedidoDAO.save(pedido);
         
         setMensagem("Pedido realizado!");

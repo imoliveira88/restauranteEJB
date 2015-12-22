@@ -27,7 +27,7 @@
                 <td>
                     <h:form>
                         <p:fieldset legend="Pedidos a atender" style="margin-bottom:20px">
-                            <p:dataTable var="pedido" value="#{pedido.pedidosNAtendidos}" rows="4" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                            <p:dataTable var="pedido" value="#{pedido.pedidosNAtendidos}" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
                                 <p:column>
                                     <f:facet name="header">ID</f:facet>
                                     <h:outputText value="#{pedido.id}"/>
@@ -57,8 +57,8 @@
             <tr>
                 <td>
                     <h:form>
-                        <p:fieldset legend="Pedidos a atender" style="margin-bottom:20px">
-                            <p:dataTable var="pedido" value="#{pedido.pedidosAtendidos}" rows="4" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                        <p:fieldset legend="Pedidos atendidos" style="margin-bottom:20px">
+                            <p:dataTable var="pedido" value="#{pedido.pedidosAtendidos}" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
                                 <p:column>
                                     <f:facet name="header">ID</f:facet>
                                     <h:outputText value="#{pedido.id}"/>

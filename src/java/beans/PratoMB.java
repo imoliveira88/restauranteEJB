@@ -14,6 +14,7 @@ public class PratoMB{
 
     private Prato prato;
     private List<Prato> pratos;
+    private String mensagem;
 
     public PratoMB() {
         this.prato = new Prato();
@@ -23,6 +24,14 @@ public class PratoMB{
 
     public List<Prato> getPratos() {
         return this.pratos;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
 
     public void setPratos(List<Prato> listarPratos) {
@@ -42,18 +51,26 @@ public class PratoMB{
         
     }
 
-    public void salvar() {
+    public String salvar() {
         PratoDAOJPA pra = new PratoDAOJPA();
         if(!pra.existePrato(this.prato)){
             pra.save(prato);
             this.pratos.add(prato);
             this.prato = new Prato();
+            this.setMensagem("Prato adicionado com sucesso!");
+            return "/faces/funcionario/cadastro_prato.xhtml";
+        }
+        else{
+            this.setMensagem("Prato não adicionado! Este nome de prato já existe!");
+            return "/faces/funcionario/cadastro_prato.xhtml";
         }
     }
     
-    public void excluir() {
+    public String excluir() {
         PratoDAOJPA pra = new PratoDAOJPA();
         pra.delete(prato);
         this.pratos.remove(prato);
+        this.setMensagem("Prato removido com sucesso!");
+        return "/faces/funcionario/cadastro_prato.xhtml";
     }
 }
