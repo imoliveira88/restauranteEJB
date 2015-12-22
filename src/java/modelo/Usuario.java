@@ -15,6 +15,7 @@ import persistencia.jpa.UsuarioDAOJPA;
 @Entity
 @NamedQueries(value = 
         {@NamedQuery(name = "Usuario.RetornaSenha", query= " SELECT u.senha FROM Usuario u WHERE u.telefone = :tel"),
+         @NamedQuery(name = "Usuario.RetornaId", query= " SELECT u.id FROM Usuario u WHERE u.telefone = :tel"),
          @NamedQuery(name = "Usuario.loginCliente", query = "SELECT max(e.id) FROM Cliente e WHERE e.telefone = :telefone")})
 @Table(name = "TB_USUARIO")
 @ManagedBean(name = "usuario")
@@ -129,15 +130,18 @@ public class Usuario implements Serializable {
        
         if (!valido) {
             setMensagem("Login ou senha incorretos!");
-            return "/login.xhtml?faces-redirect=true";
+            return "/faces/login.xhtml?faces-redirect=true";
         } else {
             UsuarioDAOJPA ud = new UsuarioDAOJPA();
+            this.setId(ud.retornaId(this.telefone));
+            
             tipo = ud.tipoUsuario(this);
+            this.setNome(ud.getById(this.getId()).nome);
             setMensagem("");
             if (tipo.equals("C")) {
-                return "/cliente/homeC.xhtml?faces-redirect=true";
+                return "/faces/cliente/homeC.xhtml?faces-redirect=true";
             } else {
-                return "/funcionario/homeF.xhtml?faces-redirect=true";
+                return "/faces/funcionario/homeF.xhtml?faces-redirect=true";
             }
         }
    
@@ -160,9 +164,7 @@ public class Usuario implements Serializable {
     }
 
     public boolean equals(Usuario usu) {
-        if (usu == null) return false;
-        
-        return this.nome.equals(usu.nome);
+        return this.telefone.equals(usu.telefone);
     }
     
     

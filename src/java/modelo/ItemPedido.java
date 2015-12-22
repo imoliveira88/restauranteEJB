@@ -28,7 +28,7 @@ public class ItemPedido implements Serializable {
     @Column(name = "ID_ITEMPEDIDO")
     private Long id;
     
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "ID_PRATO", referencedColumnName = "ID_PRATO")
     private Prato prato;
     

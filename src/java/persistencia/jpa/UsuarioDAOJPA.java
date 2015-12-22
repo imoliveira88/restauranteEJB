@@ -37,41 +37,55 @@ public class UsuarioDAOJPA extends DAOGenericoJPA<Long, Usuario> implements Usua
         }
     }
     
+    public long retornaId(String telefone){
+        Query query = super.getEm().createNamedQuery("Usuario.RetornaId");
+        
+        query.setParameter("tel", telefone);
+        
+        try{
+            return (long) query.getSingleResult();
+        }
+        catch(NoResultException e){
+            return 0;
+        }
+    }
+    
     public String tipoUsuario(Usuario usu)throws NoResultException{
         Query query = super.getEm().createNamedQuery("Usuario.loginCliente");
         
         query.setParameter("telefone", usu.getTelefone());
         
-        long tipoC = 0;
+        Object tipoC;
         
         try{
-            tipoC = (Long) query.getSingleResult();
-            if(tipoC != 0) return "C";
-            else return "F";
+            tipoC = query.getSingleResult();
+            if(tipoC == null) return "F";
+            else return "C";
         }
         catch(NoResultException e){
             return "F";
         }
     }
     
-    public boolean existeUsuario(Usuario usu){
+    //Retorna a id caso usuário exista e zero, caso não exista
+    public long existeUsuario(Usuario usu){
         String query = "select e from Usuario e";
         List<Usuario> usuarios = super.getEm().createQuery(query, Usuario.class).getResultList();
         try{
             for(Usuario usuario : usuarios){
-                if(usuario.equals(usu)) return true;
+                if(usuario.equals(usu)) return usuario.getId();
             }
-            return false;
+            return 0;
         }
         catch(NoResultException e){
-            return false;
+            return 0;
         }
     }
     
     @Override
     public void save(Usuario b) {
         super.getEm().getTransaction().begin();
-        if(!existeUsuario(b)){
+        if(existeUsuario(b) != 0){
             super.getEm().persist(b);
         }
         super.getEm().getTransaction().commit();

@@ -16,6 +16,7 @@
                 <p:menuitem value="Home" outcome="/funcionario/homeF.xhtml" iconPos="top"/>
                 <p:menuitem value="Cadastro de Funcionários" outcome="/funcionario/cadastro_funcionario.xhtml" iconPos="top"/>
                 <p:menuitem value="Cadastro de Pratos" outcome="/funcionario/cadastro_prato.xhtml" iconPos="top"/>
+                <p:menuitem value="Pedidos" outcome="/funcionario/pedidos.xhtml" iconPos="top"/>
             </p:tabMenu>
         </h:form>
         
@@ -23,6 +24,7 @@
             <tr>
                 <td>
                     <h:form enctype="multipart/form-data">
+                        <p:growl id="msgs" showDetail="true" />
                         <p:fieldset legend="Inserir pratos" style="margin-bottom:20px">
                             <h:panelGrid columns="2">
                                 Nome: <h:inputText value="#{pratoMB.prato.nome}"/>
@@ -36,7 +38,6 @@
                             </h:panelGrid> 
                         </p:fieldset>
                     </h:form>
-                    
                     <h:form>
                         <p:fieldset legend="Remover Prato" style="margin-bottom:20px">
                             <p:outputLabel value="Prato:" />
@@ -48,30 +49,35 @@
                             <br/>
                             <h:commandButton value="Remover Item" action="#{pratoMB.excluir}"/>
                         </p:fieldset>
+                        
+                        <f:facet name="footer">
+                        <h:outputText value="#{pratoMB.mensagem}"/>
+                        </f:facet>
+                        
                     </h:form>
                     
                 </td>
                 <td>
                     <h:form enctype="multipart/form-data">
                         <p:fieldset legend="Pratos Cadastrados" style="margin-bottom:20px">
-                            <h:dataTable var="prato" value="#{pratoMB.pratos}" >
-                                <h:column>
+                            <p:dataTable var="prato" value="#{pratoMB.pratos}" >
+                                <p:column>
                                     <f:facet name="header">Foto</f:facet>
                                     <h:graphicImage value="/imagens/#{prato.imagem}" width="100" height="100"/>
-                                </h:column>
-                                <h:column>
+                                </p:column>
+                                <p:column>
                                     <f:facet name="header">Nome</f:facet>
                                     <h:outputText value="#{prato.nome}"/>
-                                </h:column>
-                                <h:column>
+                                </p:column>
+                                <p:column>
                                     <f:facet name="header">Preço</f:facet>
                                     <h:outputText value="#{prato.preco}"/>
-                                </h:column>
-                                <h:column>
+                                </p:column>
+                                <p:column>
                                     <f:facet name="header">Descrição</f:facet>
                                     <h:outputText value="#{prato.descricao}"/>
-                                </h:column>
-                            </h:dataTable>
+                                </p:column>
+                            </p:dataTable>
                         </p:fieldset>
                     </h:form>
                      
