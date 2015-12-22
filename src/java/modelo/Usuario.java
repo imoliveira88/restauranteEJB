@@ -129,15 +129,15 @@ public class Usuario implements Serializable {
        
         if (!valido) {
             setMensagem("Login ou senha incorretos!");
-            return "/login.xhtml?faces-redirect=true";
+            return "/faces/login.xhtml?faces-redirect=true";
         } else {
             UsuarioDAOJPA ud = new UsuarioDAOJPA();
             tipo = ud.tipoUsuario(this);
             setMensagem("");
             if (tipo.equals("C")) {
-                return "/cliente/homeC.xhtml?faces-redirect=true";
+                return "/faces/cliente/homeC.xhtml?faces-redirect=true";
             } else {
-                return "/funcionario/homeF.xhtml?faces-redirect=true";
+                return "/faces/funcionario/homeF.xhtml?faces-redirect=true";
             }
         }
    

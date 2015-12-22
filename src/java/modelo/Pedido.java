@@ -8,10 +8,15 @@ import java.util.List;
 import javax.persistence.*;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import persistencia.jpa.PedidoDAOJPA;
 
 @ManagedBean(name = "pedido")
 @SessionScoped
 @Entity
+@NamedQueries(value = 
+        {@NamedQuery(name = "Pedido.NaoAtendido", query= " SELECT u FROM Pedido u WHERE u.atendido = 'N'"),
+         @NamedQuery(name = "Pedido.Atende", query= " UPDATE Pedido u SET u.atendido = 'S' WHERE u.id = :id"),
+         @NamedQuery(name = "Pedido.Atendido", query= " SELECT u FROM Pedido u WHERE u.atendido = 'S'")})
 @Table(name="TB_PEDIDO")
 public class Pedido implements Serializable {
     
@@ -86,6 +91,20 @@ public class Pedido implements Serializable {
 
     public void setData(Date data) {
         this.data = data;
+    }
+    
+    public List<Pedido> getPedidosNAtendidos(){
+        return new PedidoDAOJPA().pedidosNAtendidos();
+    }
+    
+    public List<Pedido> getPedidosAtendidos(){
+        return new PedidoDAOJPA().pedidosAtendidos();
+    }
+    
+    public String atendePedido(Long id){
+        PedidoDAOJPA pd = new PedidoDAOJPA();
+        pd.pedidoAtende(id);
+        return "/faces/funcionario/pedidos.xhtml";
     }
     
 }

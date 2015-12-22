@@ -16,6 +16,7 @@
                 <p:menuitem value="Home" outcome="/funcionario/homeF.xhtml" iconPos="top"/>
                 <p:menuitem value="Cadastro de Funcionários" outcome="/funcionario/cadastro_funcionario.xhtml" iconPos="top"/>
                 <p:menuitem value="Cadastro de Pratos" outcome="/funcionario/cadastro_prato.xhtml" iconPos="top"/>
+                <p:menuitem value="Pedidos" outcome="/funcionario/pedidos.xhtml" iconPos="top"/>
             </p:tabMenu>
         </h:form>
         
@@ -54,23 +55,23 @@
                 <td>
                     <h:form enctype="multipart/form-data">
                         <p:fieldset legend="Pratos Cadastrados" style="margin-bottom:20px">
-                            <h:dataTable var="prato" value="#{pratoMB.pratos}" >
-                                <h:column>
+                            <p:dataTable var="prato" value="#{pratoMB.pratos}" >
+                                <p:column>
                                     <f:facet name="header">Foto</f:facet>
                                     <h:graphicImage value="/imagens/#{prato.imagem}" width="100" height="100"/>
-                                </h:column>
-                                <h:column>
+                                </p:column>
+                                <p:column>
                                     <f:facet name="header">Nome</f:facet>
                                     <h:outputText value="#{prato.nome}"/>
-                                </h:column>
-                                <h:column>
+                                </p:column>
+                                <p:column>
                                     <f:facet name="header">Preço</f:facet>
                                     <h:outputText value="#{prato.preco}"/>
-                                </h:column>
-                                <h:column>
+                                </p:column>
+                                <p:column>
                                     <f:facet name="header">Descrição</f:facet>
                                     <h:outputText value="#{prato.descricao}"/>
-                                </h:column>
+                                </p:column>
                             </h:dataTable>
                         </p:fieldset>
                     </h:form>

@@ -9,7 +9,7 @@
     </h:head>
     <h:body>
         <h:form>
-            <p:tabMenu activeIndex="1">
+            <p:tabMenu activeIndex="-1">
                 <p:menuitem value="Logout" outcome="/login.xhtml" iconPos="top"/>
                 <p:menuitem value="Home" outcome="/cliente/homeC.xhtml" iconPos="top"/>
                 <p:menuitem value="Pedidos" outcome="/cliente/pedido.xhtml" iconPos="top"/>
@@ -45,16 +45,16 @@
                         
                         <h:form enctype="multipart/form-data">
                             <p:fieldset legend="Itens do Pedido" style="margin-bottom:20px">
-                                <h:dataTable var="item" value="#{pedidoMB.itens}" >
-                                    <h:column>
+                                <p:dataTable var="item" value="#{pedidoMB.itens}" >
+                                    <p:column>
                                         <f:facet name="header">Prato</f:facet>
                                         <h:outputText value="#{pedidoMB.prato}"/>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column>
                                         <f:facet name="header">Quantidade</f:facet>
                                         <h:outputText value="#{pedidoMB.quantidade}"/>
-                                    </h:column>
-                                </h:dataTable>
+                                    </p:column>
+                                </p:dataTable>
                             </p:fieldset>
                         </h:form>
                         
@@ -63,24 +63,24 @@
                 <td>
                     <h:form enctype="multipart/form-data">
                         <p:fieldset legend="Cardápio" style="margin-bottom:20px">
-                            <h:dataTable var="prato" value="#{pratoMB.pratos}" >
-                                <h:column>
+                            <p:dataTable var="prato" value="#{pratoMB.pratos}" >
+                                <p:column>
                                     <f:facet name="header">Foto</f:facet>
                                     <h:graphicImage value="/imagens/#{prato.imagem}" width="100px" height="100px"/>
-                                </h:column>
-                                <h:column>
+                                </p:column>
+                                <p:column>
                                     <f:facet name="header">Nome</f:facet>
                                     <h:outputText value="#{prato.nome}"/>
-                                </h:column>
-                                <h:column>
+                                </p:column>
+                                <p:column>
                                     <f:facet name="header">Preço</f:facet>
                                     <h:outputText value="#{prato.preco}"/>
-                                </h:column>
-                                <h:column>
+                                </p:column>
+                                <p:column>
                                     <f:facet name="header">Descrição</f:facet>
                                     <h:outputText value="#{prato.descricao}"/>
-                                </h:column>
-                            </h:dataTable>
+                                </p:column>
+                            </p:dataTable>
                         </p:fieldset>
                     </h:form>
                 </td>
