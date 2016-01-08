@@ -6,7 +6,7 @@
 package persistencia;
 
 import java.util.List;
-import modelo.Cliente;
+import acesso.Cliente;
 
 /**
  *

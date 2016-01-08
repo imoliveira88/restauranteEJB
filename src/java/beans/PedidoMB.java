@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import modelo.Cliente;
+import acesso.Cliente;
 import modelo.ItemPedido;
 import modelo.Pedido;
 import modelo.Prato;

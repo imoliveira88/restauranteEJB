@@ -1,9 +1,10 @@
-package modelo;
+package acesso;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import modelo.Endereco;
 import org.hibernate.validator.constraints.NotBlank;
 
 @ManagedBean(name = "funcionario")

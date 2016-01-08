@@ -7,7 +7,7 @@ package persistencia.jpa;
 
 import java.util.List;
 import javax.persistence.*;
-import modelo.Usuario;
+import acesso.Usuario;
 import persistencia.UsuarioDAO;
 
 

@@ -5,7 +5,7 @@
  */
 package persistencia.jpa;
 
-import modelo.Funcionario;
+import acesso.Funcionario;
 import javax.persistence.EntityManager;
 import persistencia.FuncionarioDAO;
 

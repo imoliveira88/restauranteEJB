@@ -6,7 +6,7 @@
 package persistencia;
 
 import java.util.List;
-import modelo.Funcionario;
+import acesso.Funcionario;
 
 /**
  *

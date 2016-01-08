@@ -9,7 +9,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import modelo.Bandeira;
 import modelo.Cartao;
-import modelo.Cliente;
+import acesso.Cliente;
 import modelo.Endereco;
 import persistencia.*;
 

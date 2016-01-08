@@ -6,7 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import modelo.Endereco;
-import modelo.Funcionario;
+import acesso.Funcionario;
 import persistencia.*;
 
 @ManagedBean(name = "cadastroF")

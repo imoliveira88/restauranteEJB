@@ -5,7 +5,7 @@
  */
 package persistencia.jpa;
 
-import modelo.Cliente;
+import acesso.Cliente;
 import persistencia.ClienteDAO;
 
 /**

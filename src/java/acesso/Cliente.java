@@ -1,10 +1,13 @@
-package modelo;
+package acesso;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
+import modelo.Cartao;
+import modelo.Endereco;
+import modelo.Pedido;
 
 @ManagedBean(name = "cliente")
 @SessionScoped
