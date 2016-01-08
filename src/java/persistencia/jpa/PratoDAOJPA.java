@@ -23,7 +23,7 @@ public class PratoDAOJPA extends DAOGenericoJPA<Long, Prato> implements PratoDAO
         super();
     }
     
-    //@Override
+    @Override
     public void delete(Prato prato) throws Exception{
         super.getEm().getTransaction().begin();
         Query query = super.getEm().createNamedQuery("Prato.RetornaId");

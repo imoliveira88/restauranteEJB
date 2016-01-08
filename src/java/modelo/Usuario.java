@@ -22,7 +22,7 @@ import persistencia.jpa.UsuarioDAOJPA;
 @SessionScoped
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "DISC_USUARIO", discriminatorType = DiscriminatorType.STRING, length = 1)
-public class Usuario implements Serializable {
+public abstract class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     
     public Usuario(String nome, String senha, String tel, Endereco end){

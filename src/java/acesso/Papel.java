@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package acesso;
 
 /**
  *
- * @author Magalhães Oliveira
+ * @author MASC
  */
-public interface EstrategiaAbstrata {
-    public String geraSenha();
+public class Papel {
+    public static final String ADMINISTRADOR = "administrador";
+    public static final String USUARIO = "usuario";
 }
