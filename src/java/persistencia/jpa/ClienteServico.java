@@ -5,18 +5,20 @@
  */
 package persistencia.jpa;
 
-import modelo.ItemPedido;
-import javax.persistence.EntityManager;
-import persistencia.ItemPedidoDAO;
+import acesso.Cliente;
 
 /**
  *
  * @author Iury
  */
-public class ItemPedidoDAOJPA extends DAOGenericoJPA<Long, ItemPedido> implements ItemPedidoDAO{
+public class ClienteServico extends ServicoGenerico<Long, Cliente>{
 
-    public ItemPedidoDAOJPA() {
+    public ClienteServico() {
         super();
+    }
+    
+    public Cliente getById(long pk) {
+        return super.getById(pk);
     }
     
 }

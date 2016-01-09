@@ -5,30 +5,35 @@
  */
 package persistencia.jpa;
 
+import javax.annotation.security.PermitAll;
+import javax.ejb.TransactionAttribute;
+import static javax.ejb.TransactionAttributeType.SUPPORTS;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import modelo.Bandeira;
-import persistencia.BandeiraDAO;
 
 /**
  *
  * @author Iury
  */
-public class BandeiraDAOJPA extends DAOGenericoJPA<Long, Bandeira> implements BandeiraDAO{
+public class BandeiraServico extends ServicoGenerico<Long, Bandeira>{
 
-    public BandeiraDAOJPA() {
+    public BandeiraServico() {
         super();
     }
 
-    @Override
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll   
     public Bandeira getById(long pk) {
         return super.getById(pk);
     }
     
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll   
     public boolean existeBandeira(Bandeira band){
         Bandeira resultado;
         String consulta = "select b from Bandeira b where b.nome = :nome";
-        TypedQuery<Bandeira> query = super.getEm().createQuery(consulta, Bandeira.class);
+        TypedQuery<Bandeira> query = entityManager.createQuery(consulta, Bandeira.class);
         query.setParameter("nome",band.getNome());
         try{
             resultado = query.getSingleResult();
@@ -40,11 +45,11 @@ public class BandeiraDAOJPA extends DAOGenericoJPA<Long, Bandeira> implements Ba
     }
     
     @Override
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll 
     public void save(Bandeira b){
-        super.getEm().getTransaction().begin();
         if(!existeBandeira(b)){
-            super.getEm().persist(b);
+            entityManager.persist(b);
         }
-        super.getEm().getTransaction().commit();
     }
 }

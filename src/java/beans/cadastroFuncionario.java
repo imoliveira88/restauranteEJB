@@ -1,10 +1,9 @@
 package beans;
 
-import persistencia.jpa.FuncionarioDAOJPA;
+import persistencia.jpa.FuncionarioServico;
 import java.text.ParseException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import modelo.Endereco;
 import acesso.Funcionario;
 import persistencia.*;
@@ -131,7 +130,7 @@ public class cadastroFuncionario{
     }
     
     public String cadastraFuncionario() throws ParseException{
-        FuncionarioDAO funcionario = new FuncionarioDAOJPA();
+        FuncionarioServico funcionario = new FuncionarioServico();
         
         Endereco endereco = new Endereco(tipologradouro,logradouro,numero,cep,cidade,estado);
         Funcionario func = new Funcionario(nome,senha,telefone,endereco,salario,cargo);

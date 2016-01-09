@@ -10,25 +10,24 @@ import java.util.List;
 import modelo.Pedido;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import persistencia.PedidoDAO;
 
 /**
  *
  * @author Iury
  */
-public class PedidoDAOJPA extends DAOGenericoJPA<Long, Pedido> implements PedidoDAO{
+public class PedidoServico extends ServicoGenerico<Long, Pedido>{
 
-    public PedidoDAOJPA() {
+    public PedidoServico() {
         super();
     }
     
-    @Override
+ 
     public Pedido getById(long pk) {
         return super.getById(pk);
     }
     
     public List<Pedido> pedidosNAtendidos()throws NoResultException{
-        Query query = super.getEm().createNamedQuery("Pedido.NaoAtendido");
+        Query query = entityManager.createNamedQuery("Pedido.NaoAtendido");
         List<Pedido> pedidos;
         
         try{
@@ -41,7 +40,7 @@ public class PedidoDAOJPA extends DAOGenericoJPA<Long, Pedido> implements Pedido
     }
     
     public List<Pedido> pedidosAtendidos()throws NoResultException{
-        Query query = super.getEm().createNamedQuery("Pedido.Atendido");
+        Query query = entityManager.createNamedQuery("Pedido.Atendido");
         List<Pedido> pedidos;
         
         try{
@@ -54,11 +53,11 @@ public class PedidoDAOJPA extends DAOGenericoJPA<Long, Pedido> implements Pedido
     }
     
     public void pedidoAtende(Long id)throws NoResultException{
-        super.getEm().getTransaction().begin();
-        Query query = super.getEm().createNamedQuery("Pedido.Atende");
+        entityManager.getTransaction().begin();
+        Query query = entityManager.createNamedQuery("Pedido.Atende");
         query.setParameter("id", id);
         
         int linhasAfetadas = query.executeUpdate();
-        super.getEm().getTransaction().commit();
+        entityManager.getTransaction().commit();
     }
 }

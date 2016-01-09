@@ -1,28 +1,33 @@
 package persistencia.jpa;
 
 import java.util.List;
+import javax.annotation.security.PermitAll;
+import javax.ejb.TransactionAttribute;
+import static javax.ejb.TransactionAttributeType.SUPPORTS;
 import modelo.Cartao;
 import javax.persistence.NoResultException;
-import persistencia.CartaoDAO;
 
 /**
  *
  * @author Iury
  */
-public class CartaoDAOJPA extends DAOGenericoJPA<Long, Cartao> implements CartaoDAO{
+public class CartaoServico extends ServicoGenerico<Long, Cartao>{
 
-    public CartaoDAOJPA() {
+    public CartaoServico() {
         super();
     }
 
-    @Override
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll 
     public Cartao getById(long pk) {
         return super.getById(pk);
     }
     
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll 
     public boolean existeCartao(Cartao car){
         String query = "select e from Cartao e";
-        List<Cartao> cartoes = super.getEm().createQuery(query, Cartao.class).getResultList();
+        List<Cartao> cartoes = entityManager.createQuery(query, Cartao.class).getResultList();
         try{
             for(Cartao cartao : cartoes){
                 if(cartao.equals(car)) return true;
@@ -34,12 +39,13 @@ public class CartaoDAOJPA extends DAOGenericoJPA<Long, Cartao> implements Cartao
         }
     }
     
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll 
     @Override
     public void save(Cartao b) {
         if(!existeCartao(b)){
-            super.getEm().getTransaction().begin();
-            super.getEm().persist(b);
-            super.getEm().getTransaction().commit();
+            entityManager.persist(b);
+
         }
     }
     

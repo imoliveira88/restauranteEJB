@@ -5,38 +5,33 @@
  */
 package persistencia.jpa;
 
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import java.util.List;
 import modelo.Prato;
-import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import persistencia.PratoDAO;
 
 /**
  *
  * @author Iury
  */
-public class PratoDAOJPA extends DAOGenericoJPA<Long, Prato> implements PratoDAO{
+public class PratoServico extends ServicoGenerico<Long, Prato>{
 
-    public PratoDAOJPA() {
+    public PratoServico() {
         super();
     }
     
     @Override
     public void delete(Prato prato) throws Exception{
-        super.getEm().getTransaction().begin();
-        Query query = super.getEm().createNamedQuery("Prato.RetornaId");
+        entityManager.getTransaction().begin();
+        Query query = entityManager.createNamedQuery("Prato.RetornaId");
         query.setParameter("nome", prato.getNome());
         
         Long id = (Long) query.getSingleResult();
         
-        Prato p = super.getEm().find(Prato.class,id);
+        Prato p = entityManager.find(Prato.class,id);
         
         try{
-            super.getEm().remove(p);
-            System.out.println("Apagandoooo");
-            super.getEm().getTransaction().commit();
+            entityManager.remove(p);
         }catch(Exception e){
             
         }
@@ -48,7 +43,7 @@ public class PratoDAOJPA extends DAOGenericoJPA<Long, Prato> implements PratoDAO
     
     public boolean existePrato(Prato p){
         String query = "select e from Prato e";
-        List<Prato> pratos = super.getEm().createQuery(query, Prato.class).getResultList();
+        List<Prato> pratos = entityManager.createQuery(query, Prato.class).getResultList();
         try{
             for(Prato prato : pratos){
                 if(prato.equals(p)){
@@ -67,16 +62,14 @@ public class PratoDAOJPA extends DAOGenericoJPA<Long, Prato> implements PratoDAO
     @Override
     public List<Prato> findAll() {
         String query = "SELECT e FROM Prato e ORDER BY e.nome";
-        List<Prato> pratos = super.getEm().createQuery(query, Prato.class).getResultList();
+        List<Prato> pratos = entityManager.createQuery(query, Prato.class).getResultList();
         return pratos;
     }
     
     @Override
     public void save(Prato b) {
         if(!existePrato(b)){
-            super.getEm().getTransaction().begin();
-            super.getEm().persist(b);
-            super.getEm().getTransaction().commit();
+            entityManager.persist(b);
         }
     }
     

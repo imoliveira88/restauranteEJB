@@ -8,7 +8,6 @@ package persistencia.jpa;
 import java.util.List;
 import javax.persistence.*;
 import acesso.Usuario;
-import persistencia.UsuarioDAO;
 
 
 /**
@@ -17,15 +16,14 @@ import persistencia.UsuarioDAO;
  */
 
 
-public class UsuarioDAOJPA extends DAOGenericoJPA<Long, Usuario> implements UsuarioDAO{
+public class UsuarioServico extends ServicoGenerico<Long, Usuario>{
 
-    public UsuarioDAOJPA() {
+    public UsuarioServico() {
         super();
     }
     
-    @Override
     public String retornaSenha(String telefone){
-        Query query = super.getEm().createNamedQuery("Usuario.RetornaSenha");
+        Query query = entityManager.createNamedQuery("Usuario.RetornaSenha");
         
         query.setParameter("tel", telefone);
         
@@ -38,7 +36,7 @@ public class UsuarioDAOJPA extends DAOGenericoJPA<Long, Usuario> implements Usua
     }
     
     public long retornaId(String telefone){
-        Query query = super.getEm().createNamedQuery("Usuario.RetornaId");
+        Query query = entityManager.createNamedQuery("Usuario.RetornaId");
         
         query.setParameter("tel", telefone);
         
@@ -51,7 +49,7 @@ public class UsuarioDAOJPA extends DAOGenericoJPA<Long, Usuario> implements Usua
     }
     
     public String tipoUsuario(Usuario usu)throws NoResultException{
-        Query query = super.getEm().createNamedQuery("Usuario.loginCliente");
+        Query query = entityManager.createNamedQuery("Usuario.loginCliente");
         
         query.setParameter("telefone", usu.getTelefone());
         
@@ -70,7 +68,7 @@ public class UsuarioDAOJPA extends DAOGenericoJPA<Long, Usuario> implements Usua
     //Retorna a id caso usuário exista e zero, caso não exista
     public long existeUsuario(Usuario usu){
         String query = "select e from Usuario e";
-        List<Usuario> usuarios = super.getEm().createQuery(query, Usuario.class).getResultList();
+        List<Usuario> usuarios = entityManager.createQuery(query, Usuario.class).getResultList();
         try{
             for(Usuario usuario : usuarios){
                 if(usuario.equals(usu)) return usuario.getId();
@@ -84,14 +82,11 @@ public class UsuarioDAOJPA extends DAOGenericoJPA<Long, Usuario> implements Usua
     
     @Override
     public void save(Usuario b) {
-        super.getEm().getTransaction().begin();
         if(existeUsuario(b) != 0){
-            super.getEm().persist(b);
+            entityManager.persist(b);
         }
-        super.getEm().getTransaction().commit();
     }
     
-    @Override
     public Usuario getById(long pk) {
         return super.getById(pk);
     }

@@ -5,22 +5,20 @@
  */
 package persistencia.jpa;
 
-import acesso.Cliente;
-import persistencia.ClienteDAO;
+import acesso.Funcionario;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author Iury
  */
-public class ClienteDAOJPA extends DAOGenericoJPA<Long, Cliente> implements ClienteDAO{
+public class FuncionarioServico extends ServicoGenerico<Long, Funcionario>{
 
-    public ClienteDAOJPA() {
+    public FuncionarioServico() {
         super();
     }
     
-    @Override
-    public Cliente getById(long pk) {
+    public Funcionario getById(long pk) {
         return super.getById(pk);
     }
-    
 }

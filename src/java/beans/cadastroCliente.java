@@ -1,6 +1,6 @@
 package beans;
 
-import persistencia.jpa.ClienteDAOJPA;
+import persistencia.jpa.ClienteServico;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -141,7 +141,7 @@ public class cadastroCliente{
     }  
     
     public String cadastraCliente() throws ParseException{
-        ClienteDAOJPA cli = new ClienteDAOJPA();
+        ClienteServico cli = new ClienteServico();
         
         
         Bandeira band = new Bandeira(this.bandeira);

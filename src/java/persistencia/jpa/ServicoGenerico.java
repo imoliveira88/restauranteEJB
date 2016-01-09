@@ -5,9 +5,15 @@
  */
 package persistencia.jpa;
 
+import static acesso.Papel.FUNCIONARIO;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
+import javax.ejb.TransactionAttribute;
+import static javax.ejb.TransactionAttributeType.SUPPORTS;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import static javax.persistence.PersistenceContextType.TRANSACTION;
 
 /**
  *
@@ -15,42 +21,32 @@ import javax.persistence.EntityManager;
  * 
  */
 @SuppressWarnings("unchecked")
-public class DAOGenericoJPA<PK, T> {
+public class ServicoGenerico<PK, T> {
     
-    private final EntityManager em;
- 
-    public DAOGenericoJPA() {
-        this.em = FabricaDAOJPA.getInstance().getFactory().createEntityManager();
-    }
-    
-    public EntityManager getEm(){
-        return this.em;
-    }
+    @PersistenceContext(name = "restaurante", type = TRANSACTION)
+    protected EntityManager entityManager;
  
     public T getById(PK pk) {
-        return (T) em.find(getTypeClass(), pk);
+        return (T) entityManager.find(getTypeClass(), pk);
     }
  
     public void save(T entity) {
-        em.getTransaction().begin();
-        em.persist(entity);
-        em.getTransaction().commit();
+        entityManager.persist(entity);
     }
  
     public void update(T entity) {
-        em.getTransaction().begin();
-        em.merge(entity);
-        em.getTransaction().commit();
+        entityManager.merge(entity);
+        entityManager.flush();
     }
  
+    @TransactionAttribute(SUPPORTS)
+    @RolesAllowed({FUNCIONARIO})
     public void delete(T entity) throws Exception{
-        em.getTransaction().begin();
-        em.remove(entity);
-        em.getTransaction().commit();
+        entityManager.remove(entity);
     }
  
     public List<T> findAll() {
-        return em.createQuery(("FROM " + getTypeClass().getName())).getResultList();
+        return entityManager.createQuery(("FROM " + getTypeClass().getName())).getResultList();
     }
  
     private Class<?> getTypeClass() {

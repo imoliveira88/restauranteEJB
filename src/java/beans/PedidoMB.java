@@ -14,9 +14,8 @@ import acesso.Cliente;
 import modelo.ItemPedido;
 import modelo.Pedido;
 import modelo.Prato;
-import persistencia.PedidoDAO;
-import persistencia.jpa.ClienteDAOJPA;
-import persistencia.jpa.PedidoDAOJPA;
+import persistencia.jpa.ClienteServico;
+import persistencia.jpa.PedidoServico;
 
 /**
  *
@@ -89,8 +88,8 @@ public class PedidoMB{
     }
     
     public String fechaPedido(long id_cliente){
-        PedidoDAO pedidoDAO = new PedidoDAOJPA();
-        this.pedido.setCliente(new ClienteDAOJPA().getById(id_cliente));
+        PedidoServico pedidoDAO = new PedidoServico();
+        this.pedido.setCliente(new ClienteServico().getById(id_cliente));
         pedidoDAO.save(pedido);
         
         setMensagem("Pedido realizado!");
