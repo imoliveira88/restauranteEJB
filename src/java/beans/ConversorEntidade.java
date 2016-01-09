@@ -13,7 +13,7 @@ import javax.faces.convert.FacesConverter;
 
 
 @FacesConverter("simpleConverter")
-    public class SimpleEntityConverter implements Converter {
+    public class ConversorEntidade implements Converter {
 
     @Override
     public Object getAsObject(FacesContext ctx, UIComponent component, String value) {
@@ -29,7 +29,7 @@ import javax.faces.convert.FacesConverter;
         if (value != null
                 && !"".equals(value)) {
 
-            BaseEntity entity = (BaseEntity) value;
+            Entidade entity = (Entidade) value;
 
             // adiciona item como atributo do componente  
             this.addAttribute(component, entity);
@@ -43,7 +43,7 @@ import javax.faces.convert.FacesConverter;
         return (String) value;
     }
 
-    protected void addAttribute(UIComponent component, BaseEntity o) {
+    protected void addAttribute(UIComponent component, Entidade o) {
         String key = o.getId().toString(); 
         this.getAttributesFrom(component).put(key, o);
     }

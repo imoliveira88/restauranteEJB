@@ -28,22 +28,18 @@
                 <h:panelGrid columns="2" cellpadding="5">
 
                     <h:outputText value="Login (telefone): " />
-                    <h:inputText value="#{usuario.telefone}" size="20" />
+                    <h:inputText value="#{loginBean.login}" size="20" />
 
                     <h:outputText value="Senha: " />
-                    <h:inputSecret value="#{usuario.senha}" size="20" />
+                    <h:inputSecret value="#{loginBean.senha}" size="20" />
 
-                    <h:commandButton value="Login" action="#{usuario.doLogin()}" class="botao"/>
+                    <h:outputLabel value="Captcha: " />
+                    <div class="g-recaptcha" data-sitekey="#{facesContext.externalContext.getInitParameter('PUBLIC_CAPTCHA_KEY')}"/>
+                    
+                    <h:commandButton value="Login" action="#{loginBean.login()}" class="botao"/>
                     
                     <f:facet name="footer">
                         <a href='faces/cadastro_cliente.xhtml'>Não tem cadastro? Clique aqui!</a>
-                        <br/>
-                        <br/>
-                        <h:outputText value="#{cadastroC.mensagem}"/>
-                        <br/>
-                        <h:outputText value="#{usuario.mensagem}"/>
-                        <br/>
-                        <div class="g-recaptcha" data-sitekey="#{facesContext.externalContext.getInitParameter('PUBLIC_CAPTCHA_KEY')}"/>
                     </f:facet>
                 </h:panelGrid>
             </p:fieldset>

@@ -1,7 +1,12 @@
 package acesso;
 
 import java.io.Serializable;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Objects;
 import javax.faces.FacesException;
@@ -52,8 +57,13 @@ public abstract class Usuario implements Serializable {
     private String telefone;
     
     @NotBlank
+    @Size(max = 10)
     @Column(name = "SENHA")
     private String senha;
+    
+    @Size(max = 10)
+    @Column(name = "TXT_SAL")
+    private String sal;
     
     @NotNull
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -98,6 +108,14 @@ public abstract class Usuario implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getSal() {
+        return sal;
+    }
+
+    public void setSal(String sal) {
+        this.sal = sal;
     }
 
     public String getSenha() {
@@ -148,6 +166,26 @@ public abstract class Usuario implements Serializable {
    
       }
     
+    @PrePersist
+    public void gerarHash() {
+        try {
+            gerarSal();
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            setSenha(sal + senha);
+            digest.update(senha.getBytes(Charset.forName("UTF-8")));
+            setSenha(Base64.getEncoder().encodeToString(digest.digest()));
+        } catch (NoSuchAlgorithmException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    private void gerarSal() throws NoSuchAlgorithmException {
+        SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+        byte[] randomBytes = new byte[32];
+        secureRandom.nextBytes(randomBytes);
+        setSal(Base64.getEncoder().encodeToString(randomBytes));
+    }
+    
     @Override
     public String toString(){
         String s = "";
@@ -159,9 +197,36 @@ public abstract class Usuario implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.id);
+        int hash = 0;
+        hash += (telefone != null ? telefone.hashCode() : 0);
         return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.telefone, other.telefone)) {
+            return false;
+        }
+        if (!Objects.equals(this.senha, other.senha)) {
+            return false;
+        }
+        if (!Objects.equals(this.sal, other.sal)) {
+            return false;
+        }
+        if (!Objects.equals(this.endereco, other.endereco)) {
+            return false;
+        }
+        return true;
     }
 
     public boolean equals(Usuario usu) {

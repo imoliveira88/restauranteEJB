@@ -15,7 +15,7 @@ import persistencia.*;
 
 @ManagedBean(name = "cadastroC")
 @RequestScoped
-public class cadastroCliente{
+public class ClienteMB{
     private String bandeira;
     private String numeroCartao;
     private Date validade;
@@ -33,7 +33,7 @@ public class cadastroCliente{
     /**
      * Creates a new instance of cadastroCliente
      */
-    public cadastroCliente() {
+    public ClienteMB() {
     }
 
     public String getBandeira() {

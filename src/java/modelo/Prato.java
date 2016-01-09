@@ -1,6 +1,6 @@
 package modelo;
 
-import beans.BaseEntity;
+import beans.Entidade;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import javax.faces.bean.SessionScoped;
             query= " SELECT max(u.id) FROM Prato u " +
                    " WHERE u.nome = :nome")
 @Table(name = "TB_PRATO")
-public class Prato implements Serializable, BaseEntity {
+public class Prato implements Serializable, Entidade {
     private static final long serialVersionUID = 1L;
     
     public Prato(){

@@ -10,7 +10,7 @@ import persistencia.*;
 
 @ManagedBean(name = "cadastroF")
 @RequestScoped
-public class cadastroFuncionario{
+public class FuncionarioMB{
     private String tipologradouro;
     private String logradouro;
     private int numero;
@@ -28,7 +28,7 @@ public class cadastroFuncionario{
     /**
      * Creates a new instance of cadastroCliente
      */
-    public cadastroFuncionario() {
+    public FuncionarioMB() {
     }
 
 

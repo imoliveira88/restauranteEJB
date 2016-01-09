@@ -1,5 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    
+    
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>saltRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/faces/login.xhtml</form-login-page>
+            <form-error-page>/faces/login.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-constraint>
+        <display-name>Pg Funcionario</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected Admin Area</web-resource-name>
+            <description>Protected Funcionario Area</description>
+            <url-pattern>/faces/funcionario/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>            
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>funcionario</role-name>
+        </auth-constraint>     
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>   
+    </security-constraint>
+    <security-constraint>
+        <display-name>Pg Clientes</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected Cliente Area</web-resource-name>
+            <description>Protected Cliente Area</description>
+            <url-pattern>/faces/cliente/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>            
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>cliente</role-name>
+        </auth-constraint>  
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>              
+    </security-constraint>    
+    <security-constraint>
+        <display-name>Pg Publicas</display-name>
+        <web-resource-collection>
+            <web-resource-name>Public Area</web-resource-name>
+            <description>Public Area</description>
+            <url-pattern>/faces/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>            
+        </web-resource-collection> 
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>   
+    </security-constraint>
+    <security-constraint>
+        <display-name>Jersey Security</display-name>
+        <web-resource-collection>
+            <web-resource-name>Jersey Security</web-resource-name>
+            <description>Jersey Security</description>
+            <url-pattern>/webservice/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>            
+    <error-page>
+        <error-code>500</error-code>
+        <location>/faces/erro.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/faces/nao_autorizado.xhtml</location>
+    </error-page>    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/faces/pagina_inexistente.xhtml</location>
+    </error-page>      
+    <error-page>
+        <exception-type>javax.ejb.EJBAccessException</exception-type>
+        <location>/faces/erro.xhtml</location>
+    </error-page> 
+    
+    
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
@@ -21,15 +129,29 @@
         <servlet-name>ExceptionHandlerServlet</servlet-name>
         <url-pattern>/ExceptionHandlerServlet</url-pattern>
     </servlet-mapping>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/ExceptionHandlerServlet</location>
-    </error-page>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    
+    
+    
+    <context-param>
+        <param-name>CAPTCHA_URL</param-name>
+        <param-value>https://www.google.com/recaptcha</param-value>
+    </context-param>    
+    <context-param>
+        <param-name>PUBLIC_CAPTCHA_KEY</param-name>
+        <param-value>6LcA4BETAAAAAI-bIVcCocgXyiLZ43bCJ-JyCvWV</param-value>
+    </context-param>
+    <context-param>
+        <param-name>PRIVATE_CAPTCHA_KEY</param-name>
+        <param-value>6LcA4BETAAAAABzA3uafX-n2AXnRHrVqDthSPwdX</param-value>
+    </context-param>
+    
+    
+    
     <welcome-file-list>
         <welcome-file>faces/login.xhtml</welcome-file>
     </welcome-file-list>  

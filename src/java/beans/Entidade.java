@@ -5,7 +5,7 @@
  */
 package beans;
 
-    public interface BaseEntity {  
+    public interface Entidade {  
       
         public Long getId();  
       
