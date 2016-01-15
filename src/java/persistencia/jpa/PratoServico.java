@@ -5,15 +5,30 @@
  */
 package persistencia.jpa;
 
+import static acesso.Papel.CLIENTE;
+import static acesso.Papel.FUNCIONARIO;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import static javax.ejb.TransactionAttributeType.REQUIRED;
+import static javax.ejb.TransactionAttributeType.SUPPORTS;
+import javax.ejb.TransactionManagement;
+import static javax.ejb.TransactionManagementType.CONTAINER;
 import modelo.Prato;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.validation.executable.ExecutableType;
+import javax.validation.executable.ValidateOnExecution;
 
-/**
- *
- * @author Iury
- */
+@Stateless
+@LocalBean
+@DeclareRoles({FUNCIONARIO, CLIENTE})
+@TransactionManagement(CONTAINER)
+@TransactionAttribute(REQUIRED) 
+@ValidateOnExecution(type = ExecutableType.NON_GETTER_METHODS)
 public class PratoServico extends ServicoGenerico<Long, Prato>{
 
     public PratoServico() {
@@ -21,6 +36,8 @@ public class PratoServico extends ServicoGenerico<Long, Prato>{
     }
     
     @Override
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll
     public void delete(Prato prato) throws Exception{
         entityManager.getTransaction().begin();
         Query query = entityManager.createNamedQuery("Prato.RetornaId");
@@ -37,10 +54,14 @@ public class PratoServico extends ServicoGenerico<Long, Prato>{
         }
     }
 
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll
     public Prato getById(long pk) {
         return super.getById(pk);
     }
     
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll
     public boolean existePrato(Prato p){
         String query = "select e from Prato e";
         List<Prato> pratos = entityManager.createQuery(query, Prato.class).getResultList();
@@ -60,6 +81,8 @@ public class PratoServico extends ServicoGenerico<Long, Prato>{
     }
     
     @Override
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll
     public List<Prato> findAll() {
         String query = "SELECT e FROM Prato e ORDER BY e.nome";
         List<Prato> pratos = entityManager.createQuery(query, Prato.class).getResultList();
@@ -67,6 +90,8 @@ public class PratoServico extends ServicoGenerico<Long, Prato>{
     }
     
     @Override
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll
     public void save(Prato b) {
         if(!existePrato(b)){
             entityManager.persist(b);

@@ -5,23 +5,38 @@
  */
 package persistencia.jpa;
 
+import static acesso.Papel.CLIENTE;
+import static acesso.Papel.FUNCIONARIO;
 import java.util.List;
 import javax.persistence.*;
 import acesso.Usuario;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import static javax.ejb.TransactionAttributeType.REQUIRED;
+import static javax.ejb.TransactionAttributeType.SUPPORTS;
+import javax.ejb.TransactionManagement;
+import static javax.ejb.TransactionManagementType.CONTAINER;
+import javax.validation.executable.ExecutableType;
+import javax.validation.executable.ValidateOnExecution;
 
 
-/**
- *
- * @author Iury
- */
-
-
+@Stateless
+@LocalBean
+@DeclareRoles({FUNCIONARIO, CLIENTE})
+@TransactionManagement(CONTAINER)
+@TransactionAttribute(REQUIRED) 
+@ValidateOnExecution(type = ExecutableType.NON_GETTER_METHODS)
 public class UsuarioServico extends ServicoGenerico<Long, Usuario>{
 
     public UsuarioServico() {
         super();
     }
     
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll
     public String retornaSenha(String telefone){
         Query query = entityManager.createNamedQuery("Usuario.RetornaSenha");
         
@@ -35,6 +50,8 @@ public class UsuarioServico extends ServicoGenerico<Long, Usuario>{
         }
     }
     
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll
     public long retornaId(String telefone){
         Query query = entityManager.createNamedQuery("Usuario.RetornaId");
         
@@ -48,6 +65,8 @@ public class UsuarioServico extends ServicoGenerico<Long, Usuario>{
         }
     }
     
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll
     public String tipoUsuario(Usuario usu)throws NoResultException{
         Query query = entityManager.createNamedQuery("Usuario.loginCliente");
         
@@ -66,6 +85,8 @@ public class UsuarioServico extends ServicoGenerico<Long, Usuario>{
     }
     
     //Retorna a id caso usuário exista e zero, caso não exista
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll
     public long existeUsuario(Usuario usu){
         String query = "select e from Usuario e";
         List<Usuario> usuarios = entityManager.createQuery(query, Usuario.class).getResultList();
@@ -81,12 +102,16 @@ public class UsuarioServico extends ServicoGenerico<Long, Usuario>{
     }
     
     @Override
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll
     public void save(Usuario b) {
         if(existeUsuario(b) != 0){
             entityManager.persist(b);
         }
     }
     
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll
     public Usuario getById(long pk) {
         return super.getById(pk);
     }

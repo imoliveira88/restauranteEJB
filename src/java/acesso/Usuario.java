@@ -24,8 +24,6 @@ import persistencia.jpa.UsuarioServico;
          @NamedQuery(name = "Usuario.RetornaId", query= " SELECT u.id FROM Usuario u WHERE u.telefone = :tel"),
          @NamedQuery(name = "Usuario.loginCliente", query = "SELECT max(e.id) FROM Cliente e WHERE e.telefone = :telefone")})
 @Table(name = "TB_USUARIO")
-@ManagedBean(name = "usuario")
-@SessionScoped
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "DISC_USUARIO", discriminatorType = DiscriminatorType.STRING, length = 1)
 public abstract class Usuario implements Serializable {

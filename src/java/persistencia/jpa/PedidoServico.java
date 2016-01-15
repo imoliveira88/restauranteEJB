@@ -5,27 +5,46 @@
  */
 package persistencia.jpa;
 
+import static acesso.Papel.CLIENTE;
+import static acesso.Papel.FUNCIONARIO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import static javax.ejb.TransactionAttributeType.REQUIRED;
+import static javax.ejb.TransactionAttributeType.SUPPORTS;
+import javax.ejb.TransactionManagement;
+import static javax.ejb.TransactionManagementType.CONTAINER;
 import modelo.Pedido;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.validation.executable.ExecutableType;
+import javax.validation.executable.ValidateOnExecution;
 
-/**
- *
- * @author Iury
- */
+
+@Stateless
+@LocalBean
+@DeclareRoles({FUNCIONARIO, CLIENTE})
+@TransactionManagement(CONTAINER)
+@TransactionAttribute(REQUIRED) 
+@ValidateOnExecution(type = ExecutableType.NON_GETTER_METHODS)
 public class PedidoServico extends ServicoGenerico<Long, Pedido>{
 
     public PedidoServico() {
         super();
     }
     
- 
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll
     public Pedido getById(long pk) {
         return super.getById(pk);
     }
     
+    @RolesAllowed({FUNCIONARIO})
     public List<Pedido> pedidosNAtendidos()throws NoResultException{
         Query query = entityManager.createNamedQuery("Pedido.NaoAtendido");
         List<Pedido> pedidos;
@@ -39,6 +58,7 @@ public class PedidoServico extends ServicoGenerico<Long, Pedido>{
         }
     }
     
+    @RolesAllowed({FUNCIONARIO})
     public List<Pedido> pedidosAtendidos()throws NoResultException{
         Query query = entityManager.createNamedQuery("Pedido.Atendido");
         List<Pedido> pedidos;
@@ -52,6 +72,7 @@ public class PedidoServico extends ServicoGenerico<Long, Pedido>{
         }
     }
     
+    @RolesAllowed({FUNCIONARIO})
     public void pedidoAtende(Long id)throws NoResultException{
         entityManager.getTransaction().begin();
         Query query = entityManager.createNamedQuery("Pedido.Atende");

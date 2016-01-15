@@ -1,16 +1,30 @@
 package persistencia.jpa;
 
+import static acesso.Papel.CLIENTE;
+import static acesso.Papel.FUNCIONARIO;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.PermitAll;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
+import static javax.ejb.TransactionAttributeType.REQUIRED;
 import static javax.ejb.TransactionAttributeType.SUPPORTS;
+import javax.ejb.TransactionManagement;
+import static javax.ejb.TransactionManagementType.CONTAINER;
 import modelo.Cartao;
 import javax.persistence.NoResultException;
+import javax.validation.executable.ExecutableType;
+import javax.validation.executable.ValidateOnExecution;
 
-/**
- *
- * @author Iury
- */
+
+
+@Stateless
+@LocalBean
+@DeclareRoles({FUNCIONARIO, CLIENTE})
+@TransactionManagement(CONTAINER)
+@TransactionAttribute(REQUIRED) 
+@ValidateOnExecution(type = ExecutableType.NON_GETTER_METHODS)
 public class CartaoServico extends ServicoGenerico<Long, Cartao>{
 
     public CartaoServico() {

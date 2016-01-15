@@ -5,12 +5,25 @@
  */
 package persistencia.jpa;
 
+import static acesso.Papel.CLIENTE;
+import static acesso.Papel.FUNCIONARIO;
+import javax.annotation.security.DeclareRoles;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import static javax.ejb.TransactionAttributeType.REQUIRED;
+import javax.ejb.TransactionManagement;
+import static javax.ejb.TransactionManagementType.CONTAINER;
+import javax.validation.executable.ExecutableType;
+import javax.validation.executable.ValidateOnExecution;
 import modelo.ItemPedido;
 
-/**
- *
- * @author Iury
- */
+@Stateless
+@LocalBean
+@DeclareRoles({FUNCIONARIO, CLIENTE})
+@TransactionManagement(CONTAINER)
+@TransactionAttribute(REQUIRED) 
+@ValidateOnExecution(type = ExecutableType.NON_GETTER_METHODS)
 public class ItemPedidoServico extends ServicoGenerico<Long, ItemPedido>{
 
     public ItemPedidoServico() {
