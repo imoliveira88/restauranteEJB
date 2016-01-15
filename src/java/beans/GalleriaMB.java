@@ -25,7 +25,7 @@ public class GalleriaMB {
         imagens = new ArrayList<>();  
   
         for(i=1;i<=5;i++) {  
-            imagens.add(i+ ".jpg");  
+            imagens.add(i+ ".JPG");  
         }  
     }  
   

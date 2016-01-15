@@ -110,13 +110,13 @@
     </context-param>
     <context-param>
         <param-name>PUBLIC_CAPTCHA_KEY</param-name>
-        <param-value>6LcA4BETAAAAAI-Papapa</param-value>
+        <param-value>6LcA4BETAAAAAI-bIVcCocgXyiLZ43bCJ-JyCvWV</param-value>
     </context-param>
     <context-param>
         <param-name>PRIVATE_CAPTCHA_KEY</param-name>
-        <param-value>6LcA4BETAAAAABzA3uafX-Papapei</param-value>
+        <param-value>6LcA4BETAAAAABzA3uafX-n2AXnRHrVqDthSPwdX</param-value>
     </context-param>
     <welcome-file-list>
-        <welcome-file>faces/login.xhtml</welcome-file>
+        <welcome-file>faces/home.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

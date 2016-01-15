@@ -4,6 +4,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import modelo.Prato;
 import org.primefaces.event.FileUploadEvent;
 import persistencia.jpa.PratoServico;
@@ -11,15 +13,19 @@ import persistencia.jpa.PratoServico;
 @ManagedBean(name = "pratoMB")
 @SessionScoped
 public class PratoMB{
+    
+    @EJB
+    PratoServico pra;
 
     private Prato prato;
     private List<Prato> pratos;
     private String mensagem;
-
-    public PratoMB() {
+    
+    @PostConstruct
+    public void iniciar(){
         this.prato = new Prato();
         this.pratos = new ArrayList<>();
-        this.pratos = new PratoServico().findAll();
+        this.pratos = pra.findAll();
     }
 
     public List<Prato> getPratos() {
@@ -47,12 +53,10 @@ public class PratoMB{
     }
 
     public void uploadAction(FileUploadEvent event) {
-        this.prato.setImagem(event.getFile().getFileName());
-        
+        this.prato.setImagem(event.getFile().getFileName());   
     }
 
     public String salvar() {
-        PratoServico pra = new PratoServico();
         if(!pra.existePrato(this.prato)){
             pra.save(prato);
             this.pratos.add(prato);
@@ -67,7 +71,6 @@ public class PratoMB{
     }
     
     public String excluir() throws Exception{
-        PratoServico pra = new PratoServico();
         pra.delete(prato);
         this.pratos.remove(prato);
         this.setMensagem("Prato removido com sucesso!");

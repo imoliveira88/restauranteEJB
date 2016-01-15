@@ -11,11 +11,11 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import acesso.Cliente;
+import javax.ejb.EJB;
 import modelo.ItemPedido;
 import modelo.Pedido;
 import modelo.Prato;
-import persistencia.jpa.ClienteServico;
-import persistencia.jpa.PedidoServico;
+import persistencia.jpa.*;
 
 /**
  *
@@ -28,6 +28,13 @@ public class PedidoMB{
     private int quantidade;
     private Prato prato;
     private List<ItemPedido> itens;
+    
+    @EJB
+    private PedidoServico ps;
+    
+    @EJB
+    private ClienteServico cs;
+    
     
     private String mensagem;
     
@@ -88,9 +95,8 @@ public class PedidoMB{
     }
     
     public String fechaPedido(long id_cliente){
-        PedidoServico pedidoDAO = new PedidoServico();
-        this.pedido.setCliente(new ClienteServico().getById(id_cliente));
-        pedidoDAO.save(pedido);
+        this.pedido.setCliente(cs.getById(id_cliente));
+        ps.save(pedido);
         
         setMensagem("Pedido realizado!");
         this.itens = new ArrayList<>();

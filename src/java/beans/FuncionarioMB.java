@@ -6,7 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import modelo.Endereco;
 import acesso.Funcionario;
-import persistencia.*;
+import javax.ejb.EJB;
 
 @ManagedBean(name = "cadastroF")
 @RequestScoped
@@ -23,6 +23,9 @@ public class FuncionarioMB{
     private String mensagem;
     private String cargo;
     private Double salario;
+    
+    @EJB
+    FuncionarioServico funcionario;
     
     
     /**
@@ -130,7 +133,6 @@ public class FuncionarioMB{
     }
     
     public String cadastraFuncionario() throws ParseException{
-        FuncionarioServico funcionario = new FuncionarioServico();
         
         Endereco endereco = new Endereco(tipologradouro,logradouro,numero,cep,cidade,estado);
         Funcionario func = new Funcionario(nome,senha,telefone,endereco,salario,cargo);

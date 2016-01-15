@@ -36,16 +36,16 @@ public class LoginBean implements Serializable {
             } else {
                 setLogin(null);
                 adicionarMensagem("Captcha inválido!");
-                return "falha";
+                return "/faces/login.xhtml?faces-redirect=true";
             }
 
         } catch (ServletException ex) {
             setLogin(null);
             adicionarMensagem("Senha ou usuário inválidos!");
-            return "falha";
+            return "/faces/login.xhtml?faces-redirect=true";
         }
 
-        return "sucesso";
+        return "/faces/cliente/homeC.xhtml";
     }
 
     private void adicionarMensagem(String mensagem) {

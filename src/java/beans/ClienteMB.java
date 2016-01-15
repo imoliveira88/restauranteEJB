@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import modelo.Bandeira;
 import modelo.Cartao;
 import acesso.Cliente;
+import javax.ejb.EJB;
 import modelo.Endereco;
 import persistencia.*;
 
@@ -29,6 +30,10 @@ public class ClienteMB{
     private String telefone;
     private String senha;
     private String mensagem;
+    
+    
+    @EJB
+    private ClienteServico cli;
     
     /**
      * Creates a new instance of cadastroCliente
@@ -141,9 +146,7 @@ public class ClienteMB{
     }  
     
     public String cadastraCliente() throws ParseException{
-        ClienteServico cli = new ClienteServico();
-        
-        
+
         Bandeira band = new Bandeira(this.bandeira);
         Cartao cartao = new Cartao(band,numeroCartao,validade);
         Endereco endereco = new Endereco(tipologradouro,logradouro,numero,cep,cidade,estado);
