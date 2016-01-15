@@ -1,6 +1,0 @@
-*IGOR - Adicionada pasta com bibliotecas
-*IGOR - Corrigido problema na cadastra_funcionario.xhtml
-*IGOR - Versão funcional de bibliotecas
-*IGOR - Cadastro de pratos
-*IGOR - Correção de links, referências e menus
-*IGOR - Criação da maioria das páginas necessárias

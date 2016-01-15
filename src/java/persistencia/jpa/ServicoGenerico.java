@@ -21,7 +21,7 @@ import static javax.persistence.PersistenceContextType.TRANSACTION;
  * 
  */
 @SuppressWarnings("unchecked")
-public class ServicoGenerico<PK, T> {
+public abstract class ServicoGenerico<PK, T> {
     
     @PersistenceContext(name = "restaurante", type = TRANSACTION)
     protected EntityManager entityManager;
