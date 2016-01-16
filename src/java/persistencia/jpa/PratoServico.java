@@ -10,6 +10,7 @@ import static acesso.Papel.FUNCIONARIO;
 import java.util.List;
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -28,7 +29,6 @@ import javax.validation.executable.ValidateOnExecution;
 @DeclareRoles({FUNCIONARIO, CLIENTE})
 @TransactionManagement(CONTAINER)
 @TransactionAttribute(REQUIRED) 
-@ValidateOnExecution(type = ExecutableType.NON_GETTER_METHODS)
 public class PratoServico extends ServicoGenerico<Long, Prato>{
 
     public PratoServico() {
@@ -37,7 +37,7 @@ public class PratoServico extends ServicoGenerico<Long, Prato>{
     
     @Override
     @TransactionAttribute(SUPPORTS)
-    @PermitAll
+    @RolesAllowed({FUNCIONARIO})
     public void delete(Prato prato) throws Exception{
         entityManager.getTransaction().begin();
         Query query = entityManager.createNamedQuery("Prato.RetornaId");
@@ -90,8 +90,7 @@ public class PratoServico extends ServicoGenerico<Long, Prato>{
     }
     
     @Override
-    @TransactionAttribute(SUPPORTS)
-    @PermitAll
+    @RolesAllowed({FUNCIONARIO})
     public void save(Prato b) {
         if(!existePrato(b)){
             entityManager.persist(b);

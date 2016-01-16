@@ -32,7 +32,6 @@ import modelo.Endereco;
 @DeclareRoles({FUNCIONARIO, CLIENTE})
 @TransactionManagement(CONTAINER)
 @TransactionAttribute(REQUIRED) 
-@ValidateOnExecution(type = ExecutableType.NON_GETTER_METHODS)
 public class EnderecoServico extends ServicoGenerico<Long, Endereco>{
     public EnderecoServico() {
         super();

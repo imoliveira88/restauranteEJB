@@ -24,14 +24,15 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Grupo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ID_GRUPO")
     private Long ID;
     
     public static final String GRUPO_POR_NOME = "GrupoPorNome";
-    public static final String CLIENTE = "cli";
-    public static final String FUNCIONARIO = "func";
+    public static final String CLIENTE = "cliente";
+    public static final String FUNCIONARIO = "funcionario";
     @NotBlank
     @Size(max = 45)
-    @Column(name = "TXT_NOME")
+    @Column(name = "GRUPO_NOME")
     private String nome;
 
     public String getNome() {

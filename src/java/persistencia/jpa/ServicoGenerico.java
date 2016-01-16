@@ -14,6 +14,7 @@ import static javax.ejb.TransactionAttributeType.SUPPORTS;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import static javax.persistence.PersistenceContextType.TRANSACTION;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -23,17 +24,23 @@ import static javax.persistence.PersistenceContextType.TRANSACTION;
 @SuppressWarnings("unchecked")
 public abstract class ServicoGenerico<PK, T> {
     
+    protected Class<T> classe;
+    
+    //@PersistenceContext(name = "restaurante", type = TRANSACTION)
     @PersistenceContext(name = "restaurante", type = TRANSACTION)
     protected EntityManager entityManager;
  
+    @TransactionAttribute(SUPPORTS)
     public T getById(PK pk) {
         return (T) entityManager.find(getTypeClass(), pk);
     }
  
+    @TransactionAttribute(SUPPORTS)
     public void save(T entity) {
         entityManager.persist(entity);
     }
  
+    @TransactionAttribute(SUPPORTS)
     public void update(T entity) {
         entityManager.merge(entity);
         entityManager.flush();
@@ -45,13 +52,27 @@ public abstract class ServicoGenerico<PK, T> {
         entityManager.remove(entity);
     }
  
+    @TransactionAttribute(SUPPORTS)
     public List<T> findAll() {
         return entityManager.createQuery(("FROM " + getTypeClass().getName())).getResultList();
     }
  
+    @TransactionAttribute(SUPPORTS)
     private Class<?> getTypeClass() {
         Class<?> clazz = (Class<?>) ((ParameterizedType) this.getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[1];
         return clazz;
+    }
+    
+    @TransactionAttribute(SUPPORTS)
+    protected T getEntidade(String nomeQuery, Object[] parametros) {
+        TypedQuery<T> query = entityManager.createNamedQuery(nomeQuery, classe);
+
+        int i = 1;
+        for (Object parametro : parametros) {
+            query.setParameter(i++, parametro);
+        }
+
+        return query.getSingleResult();
     }
 }

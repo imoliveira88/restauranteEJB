@@ -6,12 +6,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import javax.faces.FacesException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import modelo.Endereco;
@@ -43,7 +43,12 @@ public abstract class Usuario implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_USUARIO")
     private Long id;
+    
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_GRUPO", referencedColumnName = "ID_GRUPO")
+    private Grupo grupo;
     
     @Size(min = 2, max = 40)
     @NotNull
@@ -74,9 +79,16 @@ public abstract class Usuario implements Serializable {
     public String getMensagem() {
         return mensagem;
     }
-
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
+    }
+
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
     
     public String getHorario() {

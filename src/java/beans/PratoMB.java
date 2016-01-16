@@ -1,21 +1,21 @@
 package beans;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.bean.ViewScoped;
 import modelo.Prato;
 import org.primefaces.event.FileUploadEvent;
 import persistencia.jpa.PratoServico;
 
 @ManagedBean(name = "pratoMB")
-@SessionScoped
+@ViewScoped
 public class PratoMB{
     
     @EJB
-    PratoServico pra;
+    private PratoServico pra;
 
     private Prato prato;
     private List<Prato> pratos;

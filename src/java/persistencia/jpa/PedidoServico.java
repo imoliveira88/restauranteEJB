@@ -39,7 +39,7 @@ public class PedidoServico extends ServicoGenerico<Long, Pedido>{
     }
     
     @TransactionAttribute(SUPPORTS)
-    @PermitAll
+    @RolesAllowed({FUNCIONARIO})
     public Pedido getById(long pk) {
         return super.getById(pk);
     }

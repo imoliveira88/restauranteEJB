@@ -46,14 +46,26 @@ public class BandeiraServico extends ServicoGenerico<Long, Bandeira>{
     
     @TransactionAttribute(SUPPORTS)
     @PermitAll   
-    public boolean existeBandeira(Bandeira band){
+    public Bandeira getByName(String nome) {
         Bandeira resultado;
         String consulta = "select b from Bandeira b where b.nome = :nome";
         TypedQuery<Bandeira> query = entityManager.createQuery(consulta, Bandeira.class);
-        query.setParameter("nome",band.getNome());
+        query.setParameter("nome",nome);
+        
         try{
             resultado = query.getSingleResult();
-            return true;
+            return resultado;
+        }
+        catch(NoResultException e){
+            return null;
+        }
+    }
+    
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll   
+    public boolean existeBandeira(Bandeira band){
+        try{
+            return getByName(band.getNome()) != null;
         }
         catch(NoResultException e){
             return false;

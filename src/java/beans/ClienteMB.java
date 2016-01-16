@@ -2,17 +2,15 @@ package beans;
 
 import persistencia.jpa.ClienteServico;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import modelo.Bandeira;
 import modelo.Cartao;
 import acesso.Cliente;
 import javax.ejb.EJB;
 import modelo.Endereco;
-import persistencia.*;
+import persistencia.jpa.BandeiraServico;
 
 @ManagedBean(name = "cadastroC")
 @RequestScoped
@@ -31,6 +29,8 @@ public class ClienteMB{
     private String senha;
     private String mensagem;
     
+    @EJB
+    private BandeiraServico bs;
     
     @EJB
     private ClienteServico cli;
@@ -147,8 +147,14 @@ public class ClienteMB{
     
     public String cadastraCliente() throws ParseException{
 
+        Cartao cartao = new Cartao();
         Bandeira band = new Bandeira(this.bandeira);
-        Cartao cartao = new Cartao(band,numeroCartao,validade);
+        if(bs.existeBandeira(band)) cartao.setBandeira(bs.getByName(band.getNome()));
+        else cartao.setBandeira(band);
+        
+        cartao.setNumero(numeroCartao);
+        cartao.setValidade(validade);
+        
         Endereco endereco = new Endereco(tipologradouro,logradouro,numero,cep,cidade,estado);
         Cliente cliente = new Cliente(nome,senha,telefone,endereco,cartao);
 

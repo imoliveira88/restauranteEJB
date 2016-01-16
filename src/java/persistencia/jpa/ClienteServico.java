@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package persistencia.jpa;
 
 import acesso.Cliente;
@@ -17,27 +12,36 @@ import static javax.ejb.TransactionAttributeType.REQUIRED;
 import static javax.ejb.TransactionAttributeType.SUPPORTS;
 import javax.ejb.TransactionManagement;
 import static javax.ejb.TransactionManagementType.CONTAINER;
-import javax.validation.executable.ExecutableType;
-import javax.validation.executable.ValidateOnExecution;
-
+import acesso.Cliente;
+import javax.ejb.EJB;
 
 
 @Stateless
 @LocalBean
-@DeclareRoles({FUNCIONARIO, CLIENTE})
+@DeclareRoles({CLIENTE})
 @TransactionManagement(CONTAINER)
 @TransactionAttribute(REQUIRED) 
-@ValidateOnExecution(type = ExecutableType.NON_GETTER_METHODS)
-public class ClienteServico extends ServicoGenerico<Long, Cliente>{
+public class ClienteServico extends UsuarioServico{
+    
+    @EJB
+    private GrupoServico grupoService;
 
     public ClienteServico() {
         super();
     }
     
     @TransactionAttribute(SUPPORTS)
-    @PermitAll 
+    @PermitAll
+    public void save(Cliente b) {
+        if(existeUsuario(b) != 0){
+            b.setGrupo(grupoService.getGrupo(CLIENTE));
+            entityManager.persist(b);
+        }
+    }
+    
+    @Override
     public Cliente getById(long pk) {
-        return super.getById(pk);
+        return (Cliente) entityManager.find(Cliente.class, pk);
     }
     
 }

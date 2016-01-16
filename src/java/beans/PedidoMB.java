@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import acesso.Cliente;
 import javax.ejb.EJB;
 import modelo.ItemPedido;
 import modelo.Pedido;
