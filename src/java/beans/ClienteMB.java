@@ -162,6 +162,6 @@ public class ClienteMB{
         
         this.setMensagem("Cadastro feito com sucesso! Realize login!");
         
-        return "/login.xhtml?faces-redirect=true";
+        return "/public/login.xhtml?faces-redirect=true";
     }
 }

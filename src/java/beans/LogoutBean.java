@@ -1,4 +1,4 @@
-package jsf.beans;
+package beans;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
@@ -8,10 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author MASC
- */
 @ManagedBean(name = "logoutBean")
 @ViewScoped
 public class LogoutBean implements Serializable {
@@ -25,6 +21,6 @@ public class LogoutBean implements Serializable {
         
         HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();        
         request.logout();
-        return "/faces/login.xhtml?faces-redirect=true";
+        return "/faces/public/login.xhtml?faces-redirect=true";
     }
 }

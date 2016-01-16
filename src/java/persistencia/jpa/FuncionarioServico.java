@@ -5,8 +5,10 @@
  */
 package persistencia.jpa;
 
+import acesso.Cliente;
 import acesso.Funcionario;
 import static acesso.Papel.FUNCIONARIO;
+import java.util.List;
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
@@ -17,6 +19,7 @@ import static javax.ejb.TransactionAttributeType.REQUIRED;
 import static javax.ejb.TransactionAttributeType.SUPPORTS;
 import javax.ejb.TransactionManagement;
 import static javax.ejb.TransactionManagementType.CONTAINER;
+import javax.persistence.NoResultException;
 
 
 
@@ -25,7 +28,7 @@ import static javax.ejb.TransactionManagementType.CONTAINER;
 @DeclareRoles({FUNCIONARIO})
 @TransactionManagement(CONTAINER)
 @TransactionAttribute(REQUIRED) 
-public class FuncionarioServico extends UsuarioServico{
+public class FuncionarioServico extends ServicoGenerico<Cliente,Long>{
 
     @EJB
     private GrupoServico grupoService;
@@ -36,8 +39,24 @@ public class FuncionarioServico extends UsuarioServico{
     
     @TransactionAttribute(SUPPORTS)
     @PermitAll
+    public long existeFuncionario(Funcionario usu){
+        String query = "select e from Funcionario e";
+        List<Funcionario> funcionarios = entityManager.createQuery(query, Funcionario.class).getResultList();
+        try{
+            for(Funcionario funcionario : funcionarios){
+                if(funcionario.equals(usu)) return funcionario.getId();
+            }
+            return 0;
+        }
+        catch(NoResultException e){
+            return 0;
+        }
+    }
+    
+    @TransactionAttribute(SUPPORTS)
+    @PermitAll
     public void save(Funcionario b) {
-        if(existeUsuario(b) != 0){
+        if(existeFuncionario(b) != 0){
             b.setGrupo(grupoService.getGrupo(FUNCIONARIO));
             entityManager.persist(b);
         }

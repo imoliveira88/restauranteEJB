@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -9,11 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import jsf.beans.Recaptcha;
 import org.hibernate.validator.constraints.NotBlank;
+import persistencia.jpa.UsuarioServico;
 
-/**
- *
- * @author MASC
- */
 @ManagedBean(name = "loginBean")
 @RequestScoped
 public class LoginBean implements Serializable {
@@ -23,6 +21,9 @@ public class LoginBean implements Serializable {
     @NotBlank
     private String senha;
     private FacesContext facesContext;
+    
+    @EJB
+    private UsuarioServico us;
 
     public String login() {
         try {
@@ -36,16 +37,17 @@ public class LoginBean implements Serializable {
             } else {
                 setLogin(null);
                 adicionarMensagem("Captcha inválido!");
-                return "/faces/login.xhtml?faces-redirect=true";
+                return "/faces/public/login.xhtml";
             }
-
         } catch (ServletException ex) {
             setLogin(null);
             adicionarMensagem("Senha ou usuário inválidos!");
-            return "/faces/login.xhtml?faces-redirect=true";
+            return "/faces/public/login.xhtml";
         }
 
-        return "/faces/cliente/homeC.xhtml";
+        if(us.tipoUsuario(login,senha).equals("C")) return "/faces/cliente/homeC.xhtml";
+        else return "/faces/funcionario/homeF.xhtml";     
+        
     }
 
     private void adicionarMensagem(String mensagem) {

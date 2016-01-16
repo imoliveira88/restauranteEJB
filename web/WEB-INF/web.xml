@@ -4,8 +4,8 @@
         <auth-method>FORM</auth-method>
         <realm-name>JDBCRealm</realm-name>
         <form-login-config>
-            <form-login-page>/faces/login.xhtml</form-login-page>
-            <form-error-page>/faces/login.xhtml</form-error-page>
+            <form-login-page>/faces/public/login.xhtml</form-login-page>
+            <form-error-page>/faces/public/login.xhtml</form-error-page>
         </form-login-config>
     </login-config>
     <security-constraint>
@@ -16,11 +16,6 @@
             <url-pattern>/faces/funcionario/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
-            <http-method>HEAD</http-method>
-            <http-method>PUT</http-method>
-            <http-method>OPTIONS</http-method>
-            <http-method>TRACE</http-method>
-            <http-method>DELETE</http-method>
         </web-resource-collection>
         <auth-constraint>
             <description/>
@@ -38,11 +33,6 @@
             <url-pattern>/faces/cliente/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
-            <http-method>HEAD</http-method>
-            <http-method>PUT</http-method>
-            <http-method>OPTIONS</http-method>
-            <http-method>TRACE</http-method>
-            <http-method>DELETE</http-method>
         </web-resource-collection>
         <auth-constraint>
             <description/>
@@ -57,14 +47,9 @@
         <web-resource-collection>
             <web-resource-name>Public Area</web-resource-name>
             <description>Public Area</description>
-            <url-pattern>/faces/*</url-pattern>
+            <url-pattern>/faces/public/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
-            <http-method>HEAD</http-method>
-            <http-method>PUT</http-method>
-            <http-method>OPTIONS</http-method>
-            <http-method>TRACE</http-method>
-            <http-method>DELETE</http-method>
         </web-resource-collection>
         <user-data-constraint>
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
@@ -73,19 +58,19 @@
     
     <error-page>
         <error-code>500</error-code>
-        <location>/faces/erro.xhtml</location>
+        <location>/faces/public/erro.xhtml</location>
     </error-page>
     <error-page>
         <error-code>403</error-code>
-        <location>/faces/nao_autorizado.xhtml</location>
+        <location>/faces/public/nao_autorizado.xhtml</location>
     </error-page>
     <error-page>
         <error-code>404</error-code>
-        <location>/faces/pagina_inexistente.xhtml</location>
+        <location>/faces/public/pagina_inexistente.xhtml</location>
     </error-page>
     <error-page>
         <exception-type>javax.ejb.EJBAccessException</exception-type>
-        <location>/faces/erro.xhtml</location>
+        <location>/faces/public/erro.xhtml</location>
     </error-page>
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
@@ -118,6 +103,6 @@
         <param-value>6LcA4BETAAAAABzA3uafX-n2AXnRHrVqDthSPwdX</param-value>
     </context-param>
     <welcome-file-list>
-        <welcome-file>faces/home.xhtml</welcome-file>
+        <welcome-file>faces/public/home.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE glassfish-web-app PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Servlet 3.0//EN" "http://glassfish.org/dtds/glassfish-web-app_3_0-1.dtd">
-<glassfish-web-app error-url="">
+<glassfish-web-app error-url="/faces/public/erro.xhtml">
   <context-root>/ProjetoRest</context-root>
   <security-role-mapping>
     <role-name>cliente</role-name>
-    <group-name>cli</group-name>
+    <group-name>cliente</group-name>
   </security-role-mapping>
   <security-role-mapping>
     <role-name>funcionario</role-name>
-    <group-name>func</group-name>
+    <group-name>funcionario</group-name>
   </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>
